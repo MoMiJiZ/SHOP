@@ -262,7 +262,21 @@
         (h.buttonText ? '<a class="btn btn-light" href="' + esc(h.buttonLink || "#catalog") + '">' + esc(h.buttonText) + "</a>" : "") +
       "</div>";
 
-        const feat = document.getElementById("featured");
+        if (h.layout === "overlay" && h.effect === "knockout" && h.title) {
+      const t = esc(h.title).toLowerCase();
+      hero.insertAdjacentHTML("beforeend",
+        '<svg class="hero-mask" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+          '<defs><mask id="hero-knock" maskUnits="userSpaceOnUse" x="0" y="0" width="1500" height="500">' +
+            '<rect width="1500" height="500" fill="#fff"/>' +
+            '<text x="750" y="258" text-anchor="middle" dominant-baseline="central" textLength="1300" lengthAdjust="spacingAndGlyphs">' + t + "</text>" +
+          "</mask></defs>" +
+          '<rect class="hero-tint" width="1500" height="500" mask="url(#hero-knock)"/>' +
+        "</svg>");
+      const ht = hero.querySelector(".hero-title");
+      if (ht) ht.classList.add("sr-only");
+    }
+
+    const feat = document.getElementById("featured");
     let featList = (SHOP.featuredIds || []).map(findProduct).filter(Boolean);
     if (!featList.length) featList = PRODUCTS.filter(function (p) { return p.badge && !p.soldOut; });
     if (SHOP.showFeatured === false || !featList.length) {
