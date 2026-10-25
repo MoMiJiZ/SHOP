@@ -107,7 +107,7 @@ button { font: inherit; color: inherit; }
 .hero-overlay picture, .hero-overlay .hero-img { position: static; display: block; width: 100%; height: auto; }
 .hero-overlay .hero-img { aspect-ratio: 3 / 1; object-fit: cover; }
 .hero-overlay .hero-content { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 var(--gutter); }
-.hero-overlay .hero-title { margin: 0; color: #fff; mix-blend-mode: difference; text-shadow: none; font-size: clamp(48px, 15vw, 240px); }
+.hero-overlay .hero-title { margin: 0; color: var(--ink); text-shadow: 0 0 40px rgba(255,255,255,.35); font-size: clamp(44px, 12.5vw, 210px); }
 .hero-overlay .btn { position: absolute; bottom: 24px; }
 .hero-below { display: block; min-height: 0; background: #fff; }
 .hero-below picture, .hero-below .hero-img { position: static; display: block; width: 100%; height: auto; }
