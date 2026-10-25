@@ -7,7 +7,7 @@
 
 const SHOP = {
   // ---------- ข้อมูลร้าน ----------
-  name: "1020 SPECTRUM",
+  name: "1020 Spectrum",
   tagline: "คำโปรยสั้นๆ ของร้าน",
 
   // โลโก้: ใส่ที่อยู่ไฟล์รูป เช่น "images/logo.png"
@@ -25,7 +25,7 @@ const SHOP = {
   hero: {
     image: "images/hero.svg",          // แนะนำขนาดประมาณ 1600 x 900 พิกเซล
     imageMobile: "",                   // รูปแนวตั้งสำหรับมือถือ (เว้นว่างได้)
-    title: "1020 SPECTRUM",            // ตัวหนังสือใหญ่บนภาพ (เว้นว่าง "" ถ้าในรูปมีชื่ออยู่แล้ว)
+    title: "1020 Spectrum",            // ตัวหนังสือใหญ่บนภาพ (เว้นว่าง "" ถ้าในรูปมีชื่ออยู่แล้ว)
     buttonText: "ดูสินค้าทั้งหมด",
     buttonLink: "#catalog"
   },
@@ -91,7 +91,7 @@ const SHOP = {
     qrImage: ""         // รูป QR พร้อมเพย์ เช่น "images/qr.png" (เว้นว่างได้)
   },
 
-  footerNote: "© 2026 1020 SPECTRUM"
+  footerNote: "© 2026 1020 Spectrum"
 };
 
 /* หมวดหมู่สินค้า (แท็บกรองในแคตตาล็อก)
