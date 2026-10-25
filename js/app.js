@@ -262,7 +262,16 @@
         (h.buttonText ? '<a class="btn btn-light" href="' + esc(h.buttonLink || "#catalog") + '">' + esc(h.buttonText) + "</a>" : "") +
       "</div>";
 
-        if (h.layout === "overlay" && h.effect === "knockout" && h.title) {
+        if (h.layout === "overlay" && h.effect === "glass" && h.title) {
+      hero.insertAdjacentHTML("beforeend",
+        '<svg class="hero-mask" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+          '<text class="hero-glass" x="750" y="258" text-anchor="middle" dominant-baseline="central" textLength="1300" lengthAdjust="spacingAndGlyphs">' +
+            esc(h.title).toLowerCase() + "</text>" +
+        "</svg>");
+      const hg = hero.querySelector(".hero-title");
+      if (hg) hg.classList.add("sr-only");
+    }
+    if (h.layout === "overlay" && h.effect === "knockout" && h.title) {
       const t = esc(h.title).toLowerCase();
       hero.insertAdjacentHTML("beforeend",
         '<svg class="hero-mask" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +

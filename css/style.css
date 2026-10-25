@@ -2,6 +2,7 @@
   --accent: #d9708f;  --accent-soft: #f6e4ea;  --ink: #111111;  --muted: #6b6b6b;  --line: #e6e6e6;  --bg: #ffffff;  --bg-alt: #f5f4f2;  --card-bg: #f3f2f0;
   --font-display: "Outfit", "Anuphan", system-ui, sans-serif;
   --hero-tint: rgba(217, 112, 143, .55);
+  --hero-glass: rgba(255, 255, 255, .92);
   --font-head: "Anuphan", system-ui, sans-serif;
   --font-body: "Anuphan", system-ui, sans-serif;
 
@@ -112,6 +113,7 @@ button { font: inherit; color: inherit; }
 .hero-overlay .btn { position: absolute; bottom: 24px; }
 .hero-mask { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
 .hero-mask text { font-family: var(--font-display); font-weight: 600; font-size: 250px; letter-spacing: -6px; fill: #000; }
+.hero-mask .hero-glass { fill: var(--hero-glass); filter: drop-shadow(0 4px 22px rgba(0, 0, 0, .28)); }
 .hero-tint { fill: var(--hero-tint); }
 .hero-below { display: block; min-height: 0; background: #fff; }
 .hero-below picture, .hero-below .hero-img { position: static; display: block; width: 100%; height: auto; }

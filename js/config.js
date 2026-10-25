@@ -14,7 +14,7 @@ const SHOP = {
     image: "images/hero.jpg",
     imageMobile: "",
     layout: "overlay",
-    effect: "knockout",
+    effect: "glass",
     title: "1020 Spectrum",
     buttonText: "",
     buttonLink: "#catalog"
