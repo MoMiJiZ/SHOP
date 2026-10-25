@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ร้านค้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <!-- ข้อความนี้จะแสดงเฉพาะตอนที่ไฟล์ css/js โหลดไม่ขึ้น (เช่น เปิดจากใน zip โดยไม่แตกไฟล์ก่อน) -->
+  <div id="load-warning" style="margin:24px;padding:16px 20px;border:1px solid #111;font-family:sans-serif;line-height:1.7;max-width:640px">
+    <strong>ไฟล์ของเว็บโหลดไม่ครบ</strong><br>
+    ให้แตกไฟล์ zip ก่อน (คลิกขวาที่ไฟล์ zip แล้วเลือก Extract All)
+    จากนั้นเปิด index.html ในโฟลเดอร์ที่แตกออกมา โดยต้องมีโฟลเดอร์ css, js และ images อยู่ข้างกัน
+  </div>
+
+  <!-- ส่วนหัว: สร้างอัตโนมัติจาก js/config.js -->
+  <header id="site-header" class="site-header"></header>
+
+  <main>
+    <!-- 1. ภาพหลัก -->
+    <section id="hero" class="hero"></section>
+
+    <!-- 2. แถวสินค้าแนะนำ -->
+    <section id="featured" class="section featured"></section>
+
+    <!-- 3. บล็อกภาพคู่ข้อความ -->
+    <section id="stories" class="stories"></section>
+
+    <!-- 4. แคตตาล็อกสินค้า -->
+    <section id="catalog" class="section catalog">
+      <div class="container">
+        <div class="catalog-head">
+          <div>
+            <h2 id="catalog-title" class="catalog-title">สินค้าทั้งหมด</h2>
+            <div id="catalog-count" class="catalog-count"></div>
+          </div>
+          <div class="catalog-tools">
+            <input id="search" class="input" type="search" placeholder="ค้นหาสินค้า" aria-label="ค้นหาสินค้า">
+            <select id="sort" class="input" aria-label="เรียงลำดับ">
+              <option value="default">เรียงตามค่าเริ่มต้น</option>
+              <option value="low">ราคาน้อยไปมาก</option>
+              <option value="high">ราคามากไปน้อย</option>
+            </select>
+          </div>
+        </div>
+        <div id="filters" class="chips"></div>
+        <div id="product-grid" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- 5. ภาพปะติด / คอมมูนิตี้ -->
+    <section id="community" class="section community"></section>
+  </main>
+
+  <!-- ท้ายเว็บ: สร้างอัตโนมัติจาก js/config.js -->
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

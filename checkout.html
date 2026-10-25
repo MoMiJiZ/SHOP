@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>สั่งซื้อสินค้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="checkout">
+  <!-- ข้อความนี้จะแสดงเฉพาะตอนที่ไฟล์ css/js โหลดไม่ขึ้น (เช่น เปิดจากใน zip โดยไม่แตกไฟล์ก่อน) -->
+  <div id="load-warning" style="margin:24px;padding:16px 20px;border:1px solid #111;font-family:sans-serif;line-height:1.7;max-width:640px">
+    <strong>ไฟล์ของเว็บโหลดไม่ครบ</strong><br>
+    ให้แตกไฟล์ zip ก่อน (คลิกขวาที่ไฟล์ zip แล้วเลือก Extract All)
+    จากนั้นเปิด index.html ในโฟลเดอร์ที่แตกออกมา โดยต้องมีโฟลเดอร์ css, js และ images อยู่ข้างกัน
+  </div>
+  <header id="site-header" class="site-header"></header>
+
+  <main class="section">
+    <div class="container">
+      <h1 class="page-title">สั่งซื้อสินค้า</h1>
+
+      <p id="checkout-empty" class="empty" hidden>ยังไม่มีสินค้าในตะกร้า <a href="index.html">เลือกซื้อสินค้า</a></p>
+
+      <div class="cart-layout">
+        <form id="checkout-form" class="checkout-form" novalidate>
+          <h2>ข้อมูลผู้รับ</h2>
+          <label class="field">
+            <span>ชื่อ-นามสกุล</span>
+            <input class="input" name="name" autocomplete="name">
+            <small class="error" data-err="name"></small>
+          </label>
+          <label class="field">
+            <span>เบอร์โทร</span>
+            <input class="input" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0812345678">
+            <small class="error" data-err="phone"></small>
+          </label>
+          <label class="field">
+            <span>ที่อยู่จัดส่ง</span>
+            <textarea class="input" name="address" rows="3" autocomplete="street-address" placeholder="บ้านเลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
+            <small class="error" data-err="address"></small>
+          </label>
+          <label class="field">
+            <span>หมายเหตุ (ถ้ามี)</span>
+            <input class="input" name="note">
+          </label>
+
+          <h2>วิธีชำระเงิน</h2>
+          <div id="pay-options" class="pay-options"></div>
+
+          <button type="submit" class="btn btn-dark btn-block">ยืนยันคำสั่งซื้อ</button>
+        </form>
+
+        <aside id="checkout-summary" class="summary">
+          <h2>รายการสินค้า</h2>
+          <div class="sum-items"></div>
+          <div class="sum-lines"></div>
+        </aside>
+      </div>
+
+      <div id="order-result" class="order-result" hidden></div>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

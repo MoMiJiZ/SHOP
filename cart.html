@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ตะกร้าสินค้า</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="cart">
+  <!-- ข้อความนี้จะแสดงเฉพาะตอนที่ไฟล์ css/js โหลดไม่ขึ้น (เช่น เปิดจากใน zip โดยไม่แตกไฟล์ก่อน) -->
+  <div id="load-warning" style="margin:24px;padding:16px 20px;border:1px solid #111;font-family:sans-serif;line-height:1.7;max-width:640px">
+    <strong>ไฟล์ของเว็บโหลดไม่ครบ</strong><br>
+    ให้แตกไฟล์ zip ก่อน (คลิกขวาที่ไฟล์ zip แล้วเลือก Extract All)
+    จากนั้นเปิด index.html ในโฟลเดอร์ที่แตกออกมา โดยต้องมีโฟลเดอร์ css, js และ images อยู่ข้างกัน
+  </div>
+  <header id="site-header" class="site-header"></header>
+
+  <main class="section">
+    <div class="container">
+      <h1 class="page-title">ตะกร้าสินค้า</h1>
+      <div class="cart-layout">
+        <div id="cart-list" class="cart-list"></div>
+        <aside id="cart-summary" class="summary" hidden>
+          <h2>สรุปยอด</h2>
+          <div class="sum-lines"></div>
+          <a href="checkout.html" class="btn btn-dark btn-block">ไปหน้าสั่งซื้อ</a>
+          <a href="index.html" class="btn btn-block">เลือกซื้อสินค้าต่อ</a>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

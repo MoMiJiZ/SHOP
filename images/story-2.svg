@@ -1,0 +1,6 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 900' preserveAspectRatio='xMidYMid slice'>
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f6d3de'/><stop offset='1' stop-color='#dd7d9a'/></linearGradient></defs>
+<rect width='1200' height='900' fill='url(#g)'/>
+<circle cx='936.0' cy='270.0' r='288.0' fill='#fff' opacity='.12'/>
+<circle cx='180.0' cy='765.0' r='225.0' fill='#fff' opacity='.10'/>
+<text x='600.0' y='830' text-anchor='middle' font-family='Noto Sans Thai, Prompt, sans-serif' font-size='30' fill='#fff'>ภาพบล็อกที่ 2</text><text x='600.0' y='870' text-anchor='middle' font-family='Noto Sans Thai, Prompt, sans-serif' font-size='18' fill='#fff'>แนะนำ 1200 × 900 px</text></svg>

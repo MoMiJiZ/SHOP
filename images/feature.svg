@@ -1,0 +1,6 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 1200' preserveAspectRatio='xMidYMid slice'>
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#e8ddd5'/><stop offset='1' stop-color='#9e7c68'/></linearGradient></defs>
+<rect width='1200' height='1200' fill='url(#g)'/>
+<circle cx='936.0' cy='360.0' r='384.0' fill='#fff' opacity='.12'/>
+<circle cx='180.0' cy='1020.0' r='300.0' fill='#fff' opacity='.10'/>
+<text x='600.0' y='1130' text-anchor='middle' font-family='Noto Sans Thai, Prompt, sans-serif' font-size='30' fill='#fff'>ภาพใหญ่ในแคตตาล็อก</text><text x='600.0' y='1170' text-anchor='middle' font-family='Noto Sans Thai, Prompt, sans-serif' font-size='18' fill='#fff'>แนะนำ 1200 × 1200 px</text></svg>
