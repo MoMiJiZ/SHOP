@@ -1,30 +1,13 @@
-/* =========================================================
-   หน้าตาเว็บ
-   เปลี่ยนสีและฟอนต์ทั้งเว็บได้ที่ :root ด้านล่างนี้ที่เดียว
-   ========================================================= */
-
 :root {
-  --accent: #d9708f;        /* สีหลักของร้าน (ชมพู) ใช้กับป้าย ชื่อหัวข้อคอมมูนิตี้ ฯลฯ */
-  --accent-soft: #f6e4ea;   /* สีอ่อนของสีหลัก ใช้เป็นพื้นหลังบางส่วน */
-  --ink: #111111;           /* สีตัวหนังสือและปุ่มหลัก */
-  --muted: #6b6b6b;         /* สีตัวหนังสือรอง */
-  --line: #e6e6e6;          /* สีเส้นแบ่ง */
-  --bg: #ffffff;            /* สีพื้นหลังหลัก */
-  --bg-alt: #f5f4f2;        /* สีพื้นหลังรอง (บล็อกสลับ) */
-  --card-bg: #f3f2f0;       /* สีพื้นหลังรูปสินค้า */
-
-  /* ฟอนต์ชื่อร้าน (ตัวเขียนตวัด) ใช้กับโลโก้ ชื่อบนภาพหลัก และชื่อท้ายเว็บ
-     อยากเปลี่ยนเป็นตัวอื่น ให้แก้ชื่อฟอนต์ตรงนี้ และแก้ลิงก์ Google Fonts ในไฟล์ .html ทั้ง 4 ไฟล์ให้ตรงกัน */
+  --accent: #d9708f;  --accent-soft: #f6e4ea;  --ink: #111111;  --muted: #6b6b6b;  --line: #e6e6e6;  --bg: #ffffff;  --bg-alt: #f5f4f2;  --card-bg: #f3f2f0;
   --font-display: "Mr Dafoe", "Anuphan", cursive;
   --font-head: "Anuphan", system-ui, sans-serif;
   --font-body: "Anuphan", system-ui, sans-serif;
 
-  --radius: 0px;            /* ความมนของมุมการ์ด/ปุ่ม (0 = เหลี่ยม) */
-  --container: 1240px;
+  --radius: 0px;  --container: 1240px;
   --gutter: 16px;
 }
 
-/* ---------- พื้นฐาน ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 body {
@@ -49,7 +32,6 @@ button { font: inherit; color: inherit; }
 .empty { padding: 40px 0; color: var(--muted); }
 .page-title { font-size: clamp(28px, 4vw, 40px); margin-bottom: 24px; }
 
-/* ---------- ปุ่ม ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 46px; padding: 0 28px;
@@ -75,7 +57,6 @@ button { font: inherit; color: inherit; }
 .icon-btn.round { border: 1px solid var(--line); border-radius: 50%; background: #fff; }
 .icon-btn.round:hover { border-color: var(--ink); }
 
-/* ---------- ส่วนหัว ---------- */
 .site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; }
 .announce {
   background: var(--ink); color: #fff; text-align: center;
@@ -115,7 +96,6 @@ button { font: inherit; color: inherit; }
   .header-bar { position: relative; }
 }
 
-/* ---------- ภาพหลัก ---------- */
 .hero {
   position: relative; min-height: clamp(420px, 72vh, 760px);
   display: grid; place-items: center; overflow: hidden; background: var(--accent-soft);
@@ -129,12 +109,10 @@ button { font: inherit; color: inherit; }
   margin: 0 0 24px; text-shadow: 0 2px 24px rgba(0,0,0,.15);
 }
 
-/* ---------- หัวข้อส่วน ---------- */
 .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .section-head h2 { font-size: clamp(22px, 3vw, 30px); margin: 0; }
 .slider-nav { display: flex; gap: 8px; }
 
-/* ---------- การ์ดสินค้า ---------- */
 .card { display: flex; flex-direction: column; min-width: 0; }
 .card-img {
   position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden;
@@ -166,7 +144,6 @@ button { font: inherit; color: inherit; }
 .card-btn.is-disabled:hover { background: #fff; color: var(--muted); }
 .is-soldout .card-img img { opacity: .5; }
 
-/* ---------- แถวสินค้าเลื่อนข้าง ---------- */
 .slider {
   display: grid; grid-auto-flow: column;
   grid-auto-columns: calc((100% - 3 * 20px) / 4);
@@ -180,7 +157,6 @@ button { font: inherit; color: inherit; }
 @media (max-width: 900px) { .slider { grid-auto-columns: calc((100% - 2 * 16px) / 2.4); gap: 16px; } }
 @media (max-width: 520px) { .slider { grid-auto-columns: 70%; } }
 
-/* ---------- ภาพคู่ข้อความ ---------- */
 .story { display: grid; grid-template-columns: 1fr 1fr; align-items: center; background: var(--bg-alt); }
 .story + .story { background: var(--bg); }
 .story-img { aspect-ratio: 4 / 3; overflow: hidden; }
@@ -194,7 +170,6 @@ button { font: inherit; color: inherit; }
   .story-reverse .story-img { order: 0; }
 }
 
-/* ---------- แคตตาล็อก ---------- */
 .catalog-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
 .catalog-title { font-size: clamp(28px, 4.4vw, 48px); font-weight: 700; letter-spacing: -.01em; line-height: 1.2; margin: 0; }
 .catalog-count { color: var(--muted); font-size: 13px; }
@@ -219,7 +194,6 @@ button { font: inherit; color: inherit; }
   .feature-tile { grid-row: span 1; aspect-ratio: 4 / 3; }
 }
 
-/* ---------- คอมมูนิตี้ ---------- */
 .community { background: var(--bg-alt); text-align: center; overflow: hidden; }
 .community-title {
   font-size: clamp(36px, 6vw, 64px); color: var(--accent);
@@ -236,7 +210,6 @@ button { font: inherit; color: inherit; }
 .polaroid.p3 { transform: rotate(7deg) translateY(10px); }
 .community-text { max-width: 520px; margin: 0 auto 24px; color: var(--muted); }
 
-/* ---------- ท้ายเว็บ ---------- */
 .site-footer { border-top: 1px solid var(--line); padding-top: 48px; overflow: hidden; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; }
 .footer-col h4 { font-size: 13px; font-weight: 600; letter-spacing: .04em; margin-bottom: 14px; }
@@ -251,7 +224,6 @@ button { font: inherit; color: inherit; }
 }
 @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-about { grid-column: span 2; } }
 
-/* ---------- หน้ารายละเอียดสินค้า ---------- */
 .detail { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
 .gallery { display: flex; flex-direction: column; gap: 12px; }
 .main-img { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; background: var(--card-bg); }
@@ -266,7 +238,6 @@ button { font: inherit; color: inherit; }
 .desc { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); color: #333; }
 @media (max-width: 760px) { .detail { grid-template-columns: 1fr; } }
 
-/* ---------- ฟอร์ม ---------- */
 .field { display: block; margin-bottom: 16px; }
 .field > span { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
 .input {
@@ -286,7 +257,6 @@ textarea.input { resize: vertical; }
 .radio { display: flex; gap: 10px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); margin-bottom: 8px; cursor: pointer; }
 .radio:has(input:checked) { border-color: var(--ink); }
 
-/* ---------- ตะกร้า / สั่งซื้อ ---------- */
 .cart-layout { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
 @media (max-width: 900px) { .cart-layout { grid-template-columns: 1fr; } }
 .cart-item {
@@ -321,7 +291,6 @@ textarea.input { resize: vertical; }
 .pay-info h3 { font-size: 17px; }
 .qr { width: 220px; margin: 12px 0; }
 
-/* ---------- ข้อความแจ้งเตือนเล็ก ---------- */
 .toast {
   position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px);
   background: var(--ink); color: #fff; padding: 12px 22px; font-size: 14px;
@@ -329,7 +298,6 @@ textarea.input { resize: vertical; }
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* มือถือจอแคบ: ให้ราคาอยู่ใต้ชื่อสินค้า */
 @media (max-width: 520px) {
   .card-top { flex-direction: column; gap: 0; }
   .card-name, .card-price { font-size: 14px; }

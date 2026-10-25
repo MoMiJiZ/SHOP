@@ -1,101 +1,82 @@
-/* =========================================================
-   รายการสินค้า  (เพิ่ม / ลบ / แก้สินค้าที่ไฟล์นี้ไฟล์เดียว)
-
-   สินค้า 1 ชิ้น = 1 ก้อน { ... } คั่นด้วยเครื่องหมาย ,
-   ช่องที่มีได้:
-     id          รหัสสินค้า ห้ามซ้ำกัน (ใช้ตัวอังกฤษ/ตัวเลข)
-     name        ชื่อสินค้า
-     short       คำอธิบายสั้นใต้ชื่อ (บรรทัดเดียว)
-     price       ราคาขาย (ตัวเลขล้วน ไม่ต้องใส่ ฿ หรือ ,)
-     oldPrice    ราคาเดิมก่อนลด (ไม่มีก็ลบบรรทัดนี้ทิ้ง)
-     category    หมวด (ต้องตรงกับ CATEGORIES ใน config.js)
-     images      รายการรูป ["รูปแรก", "รูปที่สอง"]  รูปแรก = รูปหน้าปก
-                 แนะนำรูปสี่เหลี่ยมจัตุรัส เช่น 1000 x 1000 พิกเซล
-     description รายละเอียดสินค้า (ขึ้นบรรทัดใหม่ใช้ \n)
-     options     ตัวเลือก เช่น เฉดสี/ไซซ์ (ไม่มีก็ลบบรรทัดนี้ทิ้ง)
-     soldOut     true = สินค้าหมด (ไม่มีก็ลบบรรทัดนี้ทิ้ง)
-     badge       ป้ายมุมรูป เช่น "NEW", "BEST SELLER" (ไม่มีก็ลบทิ้ง)
-   ========================================================= */
-
 const PRODUCTS = [
   {
     id: "p001",
     name: "สินค้าตัวอย่าง 1",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 590,
     oldPrice: 690,
     category: "ลิป",
     images: ["images/product-1.svg", "images/product-2.svg", "images/product-3.svg"],
-    description: "รายละเอียดสินค้า เช่น เนื้อสัมผัส ส่วนผสม ขนาด วิธีใช้\nขึ้นบรรทัดใหม่ได้ด้วยเครื่องหมาย \\n",
+    description: "",
     options: ["เฉด 01", "เฉด 02", "เฉด 03"],
     badge: "NEW"
   },
   {
     id: "p002",
     name: "สินค้าตัวอย่าง 2",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 450,
     category: "ลิป",
     images: ["images/product-2.svg"],
-    description: "รายละเอียดสินค้าตัวอย่าง 2",
+    description: "",
     options: ["เฉด 01", "เฉด 02"],
     badge: "BEST SELLER"
   },
   {
     id: "p003",
     name: "สินค้าตัวอย่าง 3",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 890,
     category: "ผิวหน้า",
     images: ["images/product-3.svg"],
-    description: "รายละเอียดสินค้าตัวอย่าง 3"
+    description: ""
   },
   {
     id: "p004",
     name: "สินค้าตัวอย่าง 4",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 290,
     category: "อุปกรณ์",
     images: ["images/product-4.svg"],
-    description: "รายละเอียดสินค้าตัวอย่าง 4",
+    description: "",
     badge: "BEST SELLER"
   },
   {
     id: "p005",
     name: "สินค้าตัวอย่าง 5",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 1290,
     category: "ผิวหน้า",
     images: ["images/product-5.svg"],
-    description: "รายละเอียดสินค้าตัวอย่าง 5"
+    description: ""
   },
   {
     id: "p006",
     name: "สินค้าตัวอย่าง 6",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 390,
     category: "ลิป",
     images: ["images/product-6.svg"],
-    description: "รายละเอียดสินค้าตัวอย่าง 6",
+    description: "",
     badge: "NEW"
   },
   {
     id: "p007",
     name: "สินค้าตัวอย่าง 7",
-    short: "คำอธิบายสั้นของสินค้า",
+    short: "",
     price: 690,
     category: "ผิวหน้า",
     images: ["images/product-7.svg"],
-    description: "รายละเอียดสินค้าตัวอย่าง 7"
+    description: ""
   },
   {
     id: "p008",
     name: "สินค้าตัวอย่าง 8 (ของหมด)",
-    short: "ตัวอย่างสินค้าที่ตั้งเป็นของหมด",
+    short: "",
     price: 190,
     category: "อุปกรณ์",
     images: ["images/product-8.svg"],
-    description: "ตัวอย่างสินค้าที่ตั้งค่า soldOut: true",
+    description: "",
     soldOut: true
   }
 ];

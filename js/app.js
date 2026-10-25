@@ -1,23 +1,14 @@
-/* =========================================================
-   ระบบหลักของเว็บ (ตะกร้า, แสดงสินค้า, สั่งซื้อ)
-   ปกติไม่ต้องแก้ไฟล์นี้ — ข้อมูลร้านอยู่ใน config.js
-   ข้อมูลสินค้าอยู่ใน products.js
-   ========================================================= */
-
 (function () {
   "use strict";
 
   const CART_KEY = "shop_cart_v1";
 
-  /* ---------- เครื่องมือทั่วไป ---------- */
-
-  // ชื่อหน้าปัจจุบัน อ่านจาก data-page (ใส่ไว้ที่ <body> หรือกล่องครอบหน้า)
+  
   function pageName() {
     const el = document.querySelector("[data-page]") || document.body;
     return el.dataset.page || "";
   }
 
-  // กันข้อความแปลกๆ ไปทำให้หน้าเว็บพัง
   function esc(text) {
     return String(text ?? "")
       .replace(/&/g, "&amp;")
@@ -43,7 +34,6 @@
     return new URLSearchParams(location.search).get(name);
   }
 
-  // localStorage อาจใช้ไม่ได้ในบางเบราว์เซอร์ (โหมดส่วนตัว) — ใช้หน่วยความจำแทน
   let memoryCart = [];
   function loadCart() {
     try {
@@ -55,15 +45,13 @@
   }
   function saveCart(cart) {
     memoryCart = cart;
-    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) { /* ใช้หน่วยความจำแทน */ }
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {  }
     updateCartBadge();
   }
 
-  /* ---------- ตะกร้าสินค้า ---------- */
-
+  
   const Cart = {
     items: function () {
-      // ตัดสินค้าที่ถูกลบออกจาก products.js ไปแล้วทิ้ง
       return loadCart().filter(function (it) { return findProduct(it.id); });
     },
     add: function (id, option, qty) {
@@ -99,8 +87,7 @@
     }
   };
 
-  /* ---------- ส่วนหัวและท้ายเว็บ (ใช้ร่วมทุกหน้า) ---------- */
-
+  
   const ICON = {
     search: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
     bag: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
@@ -115,7 +102,6 @@
       : '<span class="logo-text">' + esc(SHOP.name) + "</span>";
   }
 
-  // ลิงก์ช่องทางติดตามร้าน (ใช้ทั้งท้ายเว็บและบล็อกคอมมูนิตี้)
   function followLink() {
     if (SHOP.lineOA) return "https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineOA);
     return SHOP.facebook || SHOP.instagram || SHOP.tiktok || "";
@@ -182,7 +168,7 @@
         '<div class="footer-grid">' +
           '<div class="footer-col footer-about" id="about">' +
             '<h4>เกี่ยวกับเรา</h4>' +
-            "<p>" + esc(SHOP.about) + "</p>" +
+            (SHOP.about ? "<p>" + esc(SHOP.about) + "</p>" : "<p>" + esc(SHOP.name) + "</p>") +
           "</div>" +
           '<div class="footer-col"><h4>เมนู</h4>' +
             '<a href="' + home + '#catalog">สินค้าทั้งหมด</a>' +
@@ -220,8 +206,7 @@
     t._timer = setTimeout(function () { t.classList.remove("show"); }, 2200);
   }
 
-  /* ---------- การ์ดสินค้า ---------- */
-
+  
   function productCard(p) {
     const url = "product.html?id=" + encodeURIComponent(p.id);
     const badge = p.soldOut
@@ -250,7 +235,6 @@
     );
   }
 
-  // ปุ่ม "ใส่ตะกร้า" บนการ์ดสินค้า (ใช้ได้ทุกหน้า)
   document.addEventListener("click", function (e) {
     const btn = e.target.closest("[data-add]");
     if (!btn) return;
@@ -258,13 +242,11 @@
     toast("เพิ่มลงตะกร้าแล้ว");
   });
 
-  /* ---------- หน้าแรก ---------- */
-
+  
   function initHome() {
     document.title = SHOP.name + (SHOP.tagline ? " | " + SHOP.tagline : "");
 
-    /* ภาพหลัก */
-    const hero = document.getElementById("hero");
+        const hero = document.getElementById("hero");
     const h = SHOP.hero || {};
     hero.innerHTML =
       (h.image
@@ -278,8 +260,7 @@
         (h.buttonText ? '<a class="btn btn-light" href="' + esc(h.buttonLink || "#catalog") + '">' + esc(h.buttonText) + "</a>" : "") +
       "</div>";
 
-    /* แถวสินค้าแนะนำ */
-    const feat = document.getElementById("featured");
+        const feat = document.getElementById("featured");
     let featList = (SHOP.featuredIds || []).map(findProduct).filter(Boolean);
     if (!featList.length) featList = PRODUCTS.filter(function (p) { return p.badge && !p.soldOut; });
     if (!featList.length) {
@@ -314,8 +295,7 @@
       progress();
     }
 
-    /* บล็อกภาพคู่ข้อความ */
-    const stories = document.getElementById("stories");
+        const stories = document.getElementById("stories");
     const st = SHOP.stories || [];
     if (!st.length) stories.hidden = true;
     stories.innerHTML = st.map(function (s, i) {
@@ -324,15 +304,14 @@
           '<div class="story-img"><img src="' + esc(s.image) + '" alt="" loading="lazy"></div>' +
           '<div class="story-text">' +
             "<h2>" + esc(s.title) + "</h2>" +
-            "<p>" + esc(s.text) + "</p>" +
+            (s.text ? "<p>" + esc(s.text) + "</p>" : "") +
             (s.buttonText ? '<a class="btn btn-dark" href="' + esc(s.buttonLink || "#catalog") + '">' + esc(s.buttonText) + "</a>" : "") +
           "</div>" +
         "</div>"
       );
     }).join("");
 
-    /* คอมมูนิตี้ */
-    const com = document.getElementById("community");
+        const com = document.getElementById("community");
     const c = SHOP.community || {};
     if (!c.images || !c.images.length) {
       com.hidden = true;
@@ -344,13 +323,12 @@
           '<div class="collage">' + c.images.slice(0, 3).map(function (src, i) {
             return '<figure class="polaroid p' + (i + 1) + '"><img src="' + esc(src) + '" alt="" loading="lazy"></figure>';
           }).join("") + "</div>" +
-          '<p class="community-text">' + esc(c.text) + "</p>" +
+          (c.text ? '<p class="community-text">' + esc(c.text) + "</p>" : "") +
           (c.buttonText && link ? '<a class="btn btn-dark" href="' + esc(link) + '" target="_blank" rel="noopener">' + esc(c.buttonText) + "</a>" : "") +
         "</div>";
     }
 
-    /* แคตตาล็อก */
-    document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "สินค้าทั้งหมด";
+        document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "สินค้าทั้งหมด";
     const filterBox = document.getElementById("filters");
     const grid = document.getElementById("product-grid");
     const search = document.getElementById("search");
@@ -392,7 +370,6 @@
         return;
       }
       const cards = list.map(productCard);
-      // แทรกภาพใหญ่หลังสินค้าชิ้นที่ 3 เฉพาะตอนดูสินค้าทั้งหมด
       const showFeature = SHOP.catalogFeatureImage && activeCat === "ทั้งหมด" && !word && list.length >= 5;
       if (showFeature) {
         cards.splice(3, 0,
@@ -403,8 +380,7 @@
     draw();
   }
 
-  /* ---------- หน้ารายละเอียดสินค้า ---------- */
-
+  
   function initProduct() {
     const box = document.getElementById("product-detail");
     const p = findProduct(qs("id"));
@@ -445,7 +421,7 @@
             ? '<button class="btn btn-block" disabled>สินค้าหมด</button>'
             : '<button id="add-btn" class="btn btn-primary btn-block">ใส่ตะกร้า</button>' +
               '<button id="buy-btn" class="btn btn-block">ซื้อเลย</button>') +
-          '<div class="desc">' + esc(p.description || "").replace(/\n/g, "<br>") + "</div>" +
+          (p.description ? '<div class="desc">' + esc(p.description).replace(/\n/g, "<br>") + "</div>" : "") +
         "</div>" +
       "</div>";
 
@@ -477,8 +453,7 @@
     }
   }
 
-  /* ---------- หน้าตะกร้า ---------- */
-
+  
   function summaryHTML(withCod) {
     const sub = Cart.subtotal();
     const ship = Cart.shipping(sub);
@@ -545,8 +520,7 @@
     draw();
   }
 
-  /* ---------- หน้าสั่งซื้อ ---------- */
-
+  
   function makeOrderNo() {
     const d = new Date();
     const pad = function (n) { return String(n).padStart(2, "0"); };
@@ -567,7 +541,6 @@
       return;
     }
 
-    // ตัวเลือกการชำระเงิน
     const pays = [];
     if (SHOP.payment.transfer) pays.push({ v: "transfer", t: "โอนเงิน / พร้อมเพย์" });
     if (SHOP.payment.cod) pays.push({ v: "cod", t: "เก็บเงินปลายทาง" + (SHOP.payment.codFee ? " (+" + money(SHOP.payment.codFee) + ")" : "") });
@@ -600,7 +573,6 @@
       const address = (f.get("address") || "").trim();
       const note = (f.get("note") || "").trim();
 
-      // ตรวจข้อมูลที่จำเป็น
       let ok = true;
       form.querySelectorAll(".error").forEach(function (x) { x.textContent = ""; });
       function err(field, msg) {
@@ -694,8 +666,7 @@
     });
   }
 
-  /* ---------- เริ่มทำงาน ---------- */
-
+  
   document.addEventListener("DOMContentLoaded", function () {
     const warn = document.getElementById("load-warning");
     if (warn) warn.remove();
@@ -708,6 +679,5 @@
     if (page === "checkout") initCheckout();
   });
 
-  // ให้หน้าอื่นๆ อัปเดตตัวเลขตะกร้าเมื่อเปิดหลายแท็บ
   window.addEventListener("storage", function (e) { if (e.key === CART_KEY) updateCartBadge(); });
 })();
