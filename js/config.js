@@ -11,8 +11,9 @@ const SHOP = {
   freeShippingMin: 1000,
 
   hero: {
-    image: "images/hero.svg",
+    image: "images/hero.jpg",
     imageMobile: "",
+    layout: "below",
     title: "1020 Spectrum",
     buttonText: "ดูสินค้าทั้งหมด",
     buttonLink: "#catalog"

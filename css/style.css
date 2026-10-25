@@ -103,6 +103,13 @@ button { font: inherit; color: inherit; }
 .hero picture, .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero-img { object-fit: cover; }
 .hero-content { position: relative; text-align: center; color: #fff; padding: 40px var(--gutter); }
+.hero-below { display: block; min-height: 0; background: #fff; }
+.hero-below picture, .hero-below .hero-img { position: static; display: block; width: 100%; height: auto; }
+.hero-below .hero-img { aspect-ratio: 3 / 1; object-fit: cover; }
+.hero-below .hero-content { color: var(--ink); padding: clamp(20px, 3vw, 40px) var(--gutter) clamp(36px, 5vw, 64px); }
+.hero-below .hero-title { text-shadow: none; font-size: clamp(56px, 9vw, 140px); margin-bottom: 20px; }
+.hero-below .btn-light { background: var(--ink); color: #fff; border-color: var(--ink); }
+.hero-below .btn-light:hover { background: #333; border-color: #333; }
 .hero-title {
   font-family: var(--font-display); font-weight: 400; letter-spacing: 0;
   font-size: clamp(64px, 13vw, 200px); line-height: 1.05; padding: 0 .12em;

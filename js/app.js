@@ -248,6 +248,7 @@
 
         const hero = document.getElementById("hero");
     const h = SHOP.hero || {};
+    if (h.layout === "below") hero.classList.add("hero-below");
     hero.innerHTML =
       (h.image
         ? "<picture>" +
