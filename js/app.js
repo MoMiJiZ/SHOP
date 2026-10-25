@@ -118,7 +118,7 @@
           '<button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="เปิดเมนู" aria-expanded="false">' + ICON.menu + "</button>" +
           '<nav class="nav" id="main-nav">' +
             '<a href="' + home + '#catalog">สินค้า</a>' +
-            '<a href="' + home + '#stories">คอลเลกชัน</a>' +
+            ((SHOP.stories || []).length ? '<a href="' + home + '#stories">คอลเลกชัน</a>' : "") +
             '<a href="' + home + '#about">เกี่ยวกับเรา</a>' +
           "</nav>" +
           '<a href="index.html" class="brand">' + brandHTML() + "</a>" +
@@ -172,7 +172,7 @@
           "</div>" +
           '<div class="footer-col"><h4>เมนู</h4>' +
             '<a href="' + home + '#catalog">สินค้าทั้งหมด</a>' +
-            '<a href="' + home + '#stories">คอลเลกชัน</a>' +
+            ((SHOP.stories || []).length ? '<a href="' + home + '#stories">คอลเลกชัน</a>' : "") +
             '<a href="cart.html">ตะกร้าสินค้า</a>' +
           "</div>" +
           '<div class="footer-col"><h4>ติดต่อร้าน</h4>' + (contact || "<span>-</span>") + "</div>" +
@@ -249,6 +249,7 @@
         const hero = document.getElementById("hero");
     const h = SHOP.hero || {};
     if (h.layout === "below") hero.classList.add("hero-below");
+    if (h.layout === "overlay") hero.classList.add("hero-overlay");
     hero.innerHTML =
       (h.image
         ? "<picture>" +
@@ -264,7 +265,7 @@
         const feat = document.getElementById("featured");
     let featList = (SHOP.featuredIds || []).map(findProduct).filter(Boolean);
     if (!featList.length) featList = PRODUCTS.filter(function (p) { return p.badge && !p.soldOut; });
-    if (!featList.length) {
+    if (SHOP.showFeatured === false || !featList.length) {
       feat.hidden = true;
     } else {
       feat.innerHTML =

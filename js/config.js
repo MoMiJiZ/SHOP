@@ -13,31 +13,17 @@ const SHOP = {
   hero: {
     image: "images/hero.jpg",
     imageMobile: "",
-    layout: "below",
+    layout: "overlay",
     title: "1020 Spectrum",
-    buttonText: "ดูสินค้าทั้งหมด",
+    buttonText: "",
     buttonLink: "#catalog"
   },
 
+  showFeatured: false,
   featuredTitle: "สินค้าแนะนำ",
   featuredIds: ["p001", "p002", "p003", "p004", "p005"],
 
-  stories: [
-    {
-      image: "images/story-1.svg",
-      title: "คอลเลกชันใหม่",
-      text: "",
-      buttonText: "ดูคอลเลกชัน",
-      buttonLink: "#catalog"
-    },
-    {
-      image: "images/story-2.svg",
-      title: "เกี่ยวกับร้านของเรา",
-      text: "",
-      buttonText: "อ่านต่อ",
-      buttonLink: "#about"
-    }
-  ],
+  stories: [],
 
   catalogTitle: "สินค้าทั้งหมด",
   catalogFeatureImage: "images/feature.svg",
@@ -45,7 +31,7 @@ const SHOP = {
   community: {
     title: "ชุมชนของเรา",
     text: "พื้นที่สำหรับลูกค้าที่ชอบสินค้าของร้าน ติดตามเพื่อรับข่าวสินค้าใหม่และโปรโมชันก่อนใคร",
-    images: ["images/community-1.svg", "images/community-2.svg", "images/community-3.svg"],
+    images: [],
     buttonText: "ติดตามร้าน",
     buttonLink: ""
   },
