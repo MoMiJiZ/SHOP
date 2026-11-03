@@ -26,7 +26,7 @@ const SHOP = {
 
   stories: [],
 
-  catalogTitle: "สินค้าทั้งหมด",
+  catalogTitle: "Catalog",
   catalogFeatureImage: "images/feature.svg",
 
   community: {

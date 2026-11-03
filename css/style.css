@@ -255,6 +255,8 @@ button { font: inherit; color: inherit; }
 .info h1 { font-size: clamp(26px, 3.4vw, 38px); }
 .detail-price { font-size: 22px; font-weight: 500; margin-bottom: 20px; }
 .desc { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); color: #333; }
+.desc-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.desc-body { min-height: 140px; line-height: 1.8; }
 @media (max-width: 760px) { .detail { grid-template-columns: 1fr; } }
 
 .field { display: block; margin-bottom: 16px; }

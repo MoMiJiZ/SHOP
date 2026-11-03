@@ -117,7 +117,7 @@
         '<div class="container header-inner">' +
           '<button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="เปิดเมนู" aria-expanded="false">' + ICON.menu + "</button>" +
           '<nav class="nav" id="main-nav">' +
-            '<a href="' + home + '#catalog">สินค้า</a>' +
+            '<a href="' + home + '#catalog">Catalog</a>' +
             ((SHOP.stories || []).length ? '<a href="' + home + '#stories">คอลเลกชัน</a>' : "") +
             '<a href="' + home + '#about">เกี่ยวกับเรา</a>' +
           "</nav>" +
@@ -171,7 +171,7 @@
             (SHOP.about ? "<p>" + esc(SHOP.about) + "</p>" : "<p>" + esc(SHOP.name) + "</p>") +
           "</div>" +
           '<div class="footer-col"><h4>เมนู</h4>' +
-            '<a href="' + home + '#catalog">สินค้าทั้งหมด</a>' +
+            '<a href="' + home + '#catalog">Catalog</a>' +
             ((SHOP.stories || []).length ? '<a href="' + home + '#stories">คอลเลกชัน</a>' : "") +
             '<a href="cart.html">ตะกร้าสินค้า</a>' +
           "</div>" +
@@ -353,7 +353,7 @@
         "</div>";
     }
 
-        document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "สินค้าทั้งหมด";
+        document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "Catalog";
     const filterBox = document.getElementById("filters");
     const grid = document.getElementById("product-grid");
     const search = document.getElementById("search");
@@ -427,13 +427,13 @@
             : "") +
         "</div>" +
         '<div class="info">' +
-          '<a href="index.html" class="back">← สินค้าทั้งหมด</a>' +
+          '<a href="index.html#catalog" class="back">← Catalog</a>' +
           '<div class="card-cat">' + esc(p.category) + "</div>" +
           "<h1>" + esc(p.name) + "</h1>" +
           '<div class="detail-price"><span class="price">' + money(p.price) + "</span>" +
             (p.oldPrice ? '<span class="old-price">' + money(p.oldPrice) + "</span>" : "") + "</div>" +
           (p.options && p.options.length
-            ? '<label class="field"><span>ตัวเลือก</span><select id="opt">' +
+            ? '<label class="field"><span>ตัวเลือก</span><select id="opt" class="input">' +
                 p.options.map(function (o) { return "<option>" + esc(o) + "</option>"; }).join("") +
               "</select></label>"
             : "") +
@@ -446,7 +446,9 @@
             ? '<button class="btn btn-block" disabled>สินค้าหมด</button>'
             : '<button id="add-btn" class="btn btn-primary btn-block">ใส่ตะกร้า</button>' +
               '<button id="buy-btn" class="btn btn-block">ซื้อเลย</button>') +
-          (p.description ? '<div class="desc">' + esc(p.description).replace(/\n/g, "<br>") + "</div>" : "") +
+          '<div class="desc"><h2 class="desc-title">รายละเอียดสินค้า</h2>' +
+            '<div class="desc-body">' + esc(p.description || "").replace(/\n/g, "<br>") + "</div>" +
+          "</div>" +
         "</div>" +
       "</div>";
 
