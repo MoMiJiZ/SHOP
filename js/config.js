@@ -4,30 +4,34 @@ const SHOP = {
 
   logo: "",
 
-  announcement: "ส่งฟรีเมื่อซื้อครบ 1,000 บาท",
+  announcement: "Free shipping on orders over 1825 baht",
 
   currency: "฿",
   shippingFee: 50,
-  freeShippingMin: 1000,
+  freeShippingMin: 1825,
 
   hero: {
     image: "images/hero.jpg",
     imageMobile: "",
     layout: "overlay",
     effect: "glass",
-    title: "1020 Spectrum",
+    title: "1020SPECTRUM",
     buttonText: "",
     buttonLink: "#catalog"
   },
 
   showFeatured: false,
   featuredTitle: "สินค้าแนะนำ",
-  featuredIds: ["p001", "p002", "p003", "p004", "p005"],
+  featuredIds: [],
 
   stories: [],
 
-  catalogTitle: "Catalog",
-  catalogFeatureImage: "images/feature.svg",
+  catalogTitle: "CATALOGE",
+  allLabel: "ALL",
+  catalogFeatures: [
+    { image: "images/p/feature-01.webp", after: 3 },
+    { image: "images/p/feature-02.webp", after: 9 }
+  ],
 
   community: {
     title: "ชุมชนของเรา",
@@ -59,4 +63,4 @@ const SHOP = {
   footerNote: "© 2026 1020 Spectrum"
 };
 
-const CATEGORIES = ["ลิป", "ผิวหน้า", "อุปกรณ์"];
+const CATEGORIES = ["GIVE A WAY", "SET MENU"];

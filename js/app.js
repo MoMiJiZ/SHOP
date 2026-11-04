@@ -27,7 +27,14 @@
   }
 
   function coverImage(p) {
-    return (p.images && p.images[0]) || "images/no-image.svg";
+    return (p.images && p.images[0]) || "";
+  }
+
+  function imageBox(p, cls, lazy) {
+    const src = coverImage(p);
+    if (!src) return '<div class="' + cls + ' ph"><span>' + esc(p.placeholder || "") + "</span></div>";
+    return '<img class="' + cls + (p.fit === "cover" && cls === "card-photo" ? " fill" : "") + '" src="' + esc(src) + '" alt="' + esc(p.name) + '"' + (lazy ? ' loading="lazy"' : "") +
+      " onerror=\"this.src='images/no-image.svg'\">";
   }
 
   function qs(name) {
@@ -117,9 +124,8 @@
         '<div class="container header-inner">' +
           '<button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="เปิดเมนู" aria-expanded="false">' + ICON.menu + "</button>" +
           '<nav class="nav" id="main-nav">' +
-            '<a href="' + home + '#catalog">Catalog</a>' +
-            ((SHOP.stories || []).length ? '<a href="' + home + '#stories">คอลเลกชัน</a>' : "") +
-            '<a href="' + home + '#about">เกี่ยวกับเรา</a>' +
+            '<a href="' + home + '#catalog">CATALOGE</a>' +
+            '<a href="' + home + '#about">ABOUT</a>' +
           "</nav>" +
           '<a href="index.html" class="brand">' + brandHTML() + "</a>" +
           '<div class="header-icons">' +
@@ -166,20 +172,15 @@
     el.innerHTML =
       '<div class="container">' +
         '<div class="footer-grid">' +
-          '<div class="footer-col footer-about" id="about">' +
-            '<h4>เกี่ยวกับเรา</h4>' +
-            (SHOP.about ? "<p>" + esc(SHOP.about) + "</p>" : "<p>" + esc(SHOP.name) + "</p>") +
+          '<div class="footer-col footer-about" id="about"><h4>About Us</h4>' +
+            "<span>" + esc(SHOP.about || SHOP.name) + "</span>" +
           "</div>" +
-          '<div class="footer-col"><h4>เมนู</h4>' +
+          '<div class="footer-col"><h4>Menu</h4>' +
             '<a href="' + home + '#catalog">Catalog</a>' +
-            ((SHOP.stories || []).length ? '<a href="' + home + '#stories">คอลเลกชัน</a>' : "") +
-            '<a href="cart.html">ตะกร้าสินค้า</a>' +
           "</div>" +
-          '<div class="footer-col"><h4>ติดต่อร้าน</h4>' + (contact || "<span>-</span>") + "</div>" +
-          '<div class="footer-col"><h4>ติดตาม</h4>' + (social || "<span>-</span>") + "</div>" +
+          '<div class="footer-col"><h4>Contact Us</h4>' + (contact || "<span>-</span>") + "</div>" +
+          '<div class="footer-col"><h4>Follow Us</h4>' + (social || "<span>-</span>") + "</div>" +
         "</div>" +
-        '<div class="footer-bottom">' + esc(SHOP.footerNote) + "</div>" +
-        '<div class="footer-wordmark" aria-hidden="true">' + esc(SHOP.name) + "</div>" +
       "</div>";
   }
 
@@ -209,18 +210,17 @@
   
   function productCard(p) {
     const url = "product.html?id=" + encodeURIComponent(p.id);
-    const badge = p.soldOut
-      ? '<span class="badge">SOLD OUT</span>'
-      : p.badge ? '<span class="badge">' + esc(p.badge) + "</span>" : "";
+    const badgeText = p.soldOut ? "SOLD OUT" : (p.badge || "");
     let action;
-    if (p.soldOut) action = '<span class="card-btn is-disabled">สินค้าหมด</span>';
-    else if (p.options && p.options.length) action = '<a class="card-btn" href="' + url + '">เลือกตัวเลือก</a>';
-    else action = '<button type="button" class="card-btn" data-add="' + esc(p.id) + '">ใส่ตะกร้า</button>';
+    if (p.soldOut) action = '<span class="card-btn is-disabled">SOLD OUT</span>';
+    else if (p.options && p.options.length) action = '<a class="card-btn" href="' + url + '">SELECT OPTIONS</a>';
+    else action = '<button type="button" class="card-btn" data-add="' + esc(p.id) + '">ADD TO CART</button>';
 
     return (
       '<article class="card' + (p.soldOut ? " is-soldout" : "") + '">' +
-        '<a class="card-img" href="' + url + '">' + badge +
-          '<img src="' + esc(coverImage(p)) + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.src=\'images/no-image.svg\'">' +
+        '<a class="card-img" href="' + url + '">' +
+          (badgeText ? '<span class="badge">' + esc(badgeText) + "</span>" : "") +
+          imageBox(p, "card-photo", true) +
         "</a>" +
         '<div class="card-body">' +
           '<div class="card-top">' +
@@ -228,7 +228,6 @@
             '<span class="card-price">' + money(p.price) +
               (p.oldPrice ? ' <s class="old-price">' + money(p.oldPrice) + "</s>" : "") + "</span>" +
           "</div>" +
-          (p.short ? '<div class="card-short">' + esc(p.short) + "</div>" : "") +
           action +
         "</div>" +
       "</article>"
@@ -239,7 +238,7 @@
     const btn = e.target.closest("[data-add]");
     if (!btn) return;
     Cart.add(btn.dataset.add, "", 1);
-    toast("เพิ่มลงตะกร้าแล้ว");
+    toast("Added to cart");
   });
 
   
@@ -266,7 +265,7 @@
       hero.insertAdjacentHTML("beforeend",
         '<svg class="hero-mask" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
           '<text class="hero-glass" x="750" y="258" text-anchor="middle" dominant-baseline="central" textLength="1300" lengthAdjust="spacingAndGlyphs">' +
-            esc(h.title).toLowerCase() + "</text>" +
+            esc(h.title) + "</text>" +
         "</svg>");
       const hg = hero.querySelector(".hero-title");
       if (hg) hg.classList.add("sr-only");
@@ -353,14 +352,15 @@
         "</div>";
     }
 
-        document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "Catalog";
+    document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "CATALOGE";
     const filterBox = document.getElementById("filters");
     const grid = document.getElementById("product-grid");
     const search = document.getElementById("search");
     const sort = document.getElementById("sort");
-    let activeCat = "ทั้งหมด";
+    const ALL = SHOP.allLabel || "ALL";
+    let activeCat = ALL;
 
-    const cats = ["ทั้งหมด"].concat(CATEGORIES);
+    const cats = [ALL].concat(CATEGORIES);
     filterBox.innerHTML = cats.map(function (c) {
       return '<button type="button" class="chip' + (c === activeCat ? " active" : "") + '" data-cat="' + esc(c) + '">' + esc(c) + "</button>";
     }).join("");
@@ -380,84 +380,112 @@
     function draw() {
       const word = search.value.trim().toLowerCase();
       let list = PRODUCTS.filter(function (p) {
-        const okCat = activeCat === "ทั้งหมด" || p.category === activeCat;
-        const okWord = !word ||
-          p.name.toLowerCase().includes(word) ||
-          (p.description || "").toLowerCase().includes(word);
+        const okCat = activeCat === ALL || p.category === activeCat;
+        const okWord = !word || p.name.toLowerCase().includes(word);
         return okCat && okWord;
       });
-      if (sort.value === "low") list = list.slice().sort(function (a, b) { return a.price - b.price; });
-      if (sort.value === "high") list = list.slice().sort(function (a, b) { return b.price - a.price; });
+      const by = {
+        low: function (a, b) { return a.price - b.price; },
+        high: function (a, b) { return b.price - a.price; },
+        newest: function (a, b) { return (b.added || 0) - (a.added || 0); },
+        top: function (a, b) { return (b.sold || 0) - (a.sold || 0); }
+      }[sort.value];
+      if (by) list = list.slice().sort(by);
 
-      document.getElementById("catalog-count").textContent = list.length + " รายการ";
+      document.getElementById("catalog-count").textContent = list.length + " ITEMS";
       if (!list.length) {
-        grid.innerHTML = '<p class="empty">ไม่พบสินค้าที่ค้นหา</p>';
+        grid.innerHTML = '<p class="empty">No items found</p>';
         return;
       }
       const cards = list.map(productCard);
-      const showFeature = SHOP.catalogFeatureImage && activeCat === "ทั้งหมด" && !word && list.length >= 5;
-      if (showFeature) {
-        cards.splice(3, 0,
-          '<div class="feature-tile"><img src="' + esc(SHOP.catalogFeatureImage) + '" alt="" loading="lazy"></div>');
+      const plain = activeCat === ALL && !word && !by;
+      if (plain) {
+        (SHOP.catalogFeatures || []).slice().sort(function (x, y) { return y.after - x.after; }).forEach(function (f) {
+          if (f.after <= cards.length) {
+            cards.splice(f.after, 0, '<div class="feature-tile"><img src="' + esc(f.image) + '" alt="" loading="lazy"></div>');
+          }
+        });
       }
       grid.innerHTML = cards.join("");
     }
     draw();
   }
 
-  
   function initProduct() {
     const box = document.getElementById("product-detail");
     const p = findProduct(qs("id"));
     if (!p) {
-      box.innerHTML = '<p class="empty">ไม่พบสินค้านี้ <a href="index.html">กลับไปหน้าสินค้าทั้งหมด</a></p>';
+      box.innerHTML = '<p class="empty">Item not found. <a href="index.html#catalog">Back to CATALOGE</a></p>';
       return;
     }
+    const title = p.name + (p.soldOut ? " (SOLD OUT)" : "");
     document.title = p.name + " | " + SHOP.name;
-    const imgs = (p.images && p.images.length) ? p.images : ["images/no-image.svg"];
+    const imgs = (p.images || []).slice();
+    const opts = p.options || [];
+    opts.forEach(function (o) { if (o.image && imgs.indexOf(o.image) < 0) imgs.push(o.image); });
+    const details = (p.details || []).filter(Boolean);
 
     box.innerHTML =
       '<div class="detail">' +
         '<div class="gallery">' +
-          '<img id="main-img" class="main-img" src="' + esc(imgs[0]) + '" alt="' + esc(p.name) + '" onerror="this.src=\'images/no-image.svg\'">' +
+          '<div class="main-frame">' + (imgs.length
+            ? '<img id="main-img" class="main-img" src="' + esc(imgs[0]) + '" alt="' + esc(p.name) + '">'
+            : '<div class="main-img ph"><span>' + esc(p.placeholder || "") + "</span></div>") +
+          "</div>" +
           (imgs.length > 1
             ? '<div class="thumbs">' + imgs.map(function (src, i) {
-                return '<button type="button" class="thumb' + (i === 0 ? " active" : "") + '" data-src="' + esc(src) + '"><img src="' + esc(src) + '" alt=""></button>';
+                return '<button type="button" class="thumb' + (i === 0 ? " active" : "") + '" data-src="' + esc(src) + '" aria-label="Image ' + (i + 1) + '"><img src="' + esc(src) + '" alt=""></button>';
               }).join("") + "</div>"
             : "") +
         "</div>" +
         '<div class="info">' +
-          '<a href="index.html#catalog" class="back">← Catalog</a>' +
-          '<div class="card-cat">' + esc(p.category) + "</div>" +
-          "<h1>" + esc(p.name) + "</h1>" +
+          '<a href="index.html#catalog" class="back">← CATALOGE</a>' +
+          '<div class="info-cat">' + esc(p.category) + "</div>" +
+          '<h1 class="info-title">' + esc(title) + "</h1>" +
           '<div class="detail-price"><span class="price">' + money(p.price) + "</span>" +
-            (p.oldPrice ? '<span class="old-price">' + money(p.oldPrice) + "</span>" : "") + "</div>" +
-          (p.options && p.options.length
-            ? '<label class="field"><span>ตัวเลือก</span><select id="opt" class="input">' +
-                p.options.map(function (o) { return "<option>" + esc(o) + "</option>"; }).join("") +
+            (p.oldPrice ? '<s class="old-price">' + money(p.oldPrice) + "</s>" : "") + "</div>" +
+          (opts.length
+            ? '<label class="field"><span>Options</span><select id="opt" class="input">' +
+                opts.map(function (o) { return '<option value="' + esc(o.label) + '">' + esc(o.label) + "</option>"; }).join("") +
               "</select></label>"
             : "") +
-          '<label class="field"><span>จำนวน</span>' +
-            '<div class="qty"><button type="button" data-step="-1" aria-label="ลดจำนวน">−</button>' +
-            '<input id="qty" type="number" min="1" value="1" inputmode="numeric">' +
-            '<button type="button" data-step="1" aria-label="เพิ่มจำนวน">+</button></div>' +
-          "</label>" +
+          '<div class="field"><span>Quantity</span>' +
+            '<div class="qty"><button type="button" data-step="-1" aria-label="Decrease">−</button>' +
+            '<input id="qty" type="number" min="1" value="1" inputmode="numeric" aria-label="Quantity">' +
+            '<button type="button" data-step="1" aria-label="Increase">+</button></div>' +
+          "</div>" +
           (p.soldOut
-            ? '<button class="btn btn-block" disabled>สินค้าหมด</button>'
-            : '<button id="add-btn" class="btn btn-primary btn-block">ใส่ตะกร้า</button>' +
-              '<button id="buy-btn" class="btn btn-block">ซื้อเลย</button>') +
-          '<div class="desc"><h2 class="desc-title">รายละเอียดสินค้า</h2>' +
-            '<div class="desc-body">' + esc(p.description || "").replace(/\n/g, "<br>") + "</div>" +
+            ? '<button class="btn btn-block btn-soldout" disabled>SOLD OUT</button>'
+            : '<button id="add-btn" class="btn btn-primary btn-block">Add to Cart</button>' +
+              '<button id="buy-btn" class="btn btn-block">Buy Now</button>') +
+          '<div class="desc"><h2 class="desc-title">Product Details</h2>' +
+            '<ul class="desc-list">' + details.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>" +
           "</div>" +
         "</div>" +
       "</div>";
 
+    const main = document.getElementById("main-img");
+    const optEl = document.getElementById("opt");
+    function show(src) {
+      if (!main || !src) return;
+      main.src = src;
+      box.querySelectorAll(".thumb").forEach(function (x) { x.classList.toggle("active", x.dataset.src === src); });
+    }
     box.querySelectorAll(".thumb").forEach(function (t) {
       t.addEventListener("click", function () {
-        document.getElementById("main-img").src = t.dataset.src;
-        box.querySelectorAll(".thumb").forEach(function (x) { x.classList.toggle("active", x === t); });
+        show(t.dataset.src);
+        if (optEl) {
+          const o = opts.find(function (o) { return o.image === t.dataset.src; });
+          if (o && opts.filter(function (x) { return x.image === o.image; }).length === 1) optEl.value = o.label;
+        }
       });
     });
+    if (optEl) {
+      optEl.addEventListener("change", function () {
+        const o = opts.find(function (o) { return o.label === optEl.value; });
+        if (o) show(o.image);
+      });
+    }
 
     const qtyInput = document.getElementById("qty");
     box.querySelectorAll(".qty button").forEach(function (b) {
@@ -468,19 +496,17 @@
 
     function addToCart() {
       const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
-      const optEl = document.getElementById("opt");
       Cart.add(p.id, optEl ? optEl.value : "", qty);
     }
     const addBtn = document.getElementById("add-btn");
     if (addBtn) {
-      addBtn.addEventListener("click", function () { addToCart(); toast("เพิ่มลงตะกร้าแล้ว"); });
+      addBtn.addEventListener("click", function () { addToCart(); toast("Added to cart"); });
       document.getElementById("buy-btn").addEventListener("click", function () {
         addToCart(); location.href = "cart.html";
       });
     }
   }
 
-  
   function summaryHTML(withCod) {
     const sub = Cart.subtotal();
     const ship = Cart.shipping(sub);
@@ -517,7 +543,7 @@
         const p = findProduct(it.id);
         return (
           '<div class="cart-item" data-key="' + esc(it.key) + '">' +
-            '<img src="' + esc(coverImage(p)) + '" alt="" onerror="this.src=\'images/no-image.svg\'">' +
+            imageBox(p, "ci-img", false) +
             '<div class="ci-info">' +
               '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="ci-name">' + esc(p.name) + "</a>" +
               (it.option ? '<div class="ci-opt">ตัวเลือก: ' + esc(it.option) + "</div>" : "") +

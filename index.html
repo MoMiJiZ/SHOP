@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Outfit:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="css/style.css?v=15">
 </head>
 <body data-page="home">
 
@@ -32,15 +32,17 @@
       <div class="container">
         <div class="catalog-head">
           <div>
-            <h2 id="catalog-title" class="catalog-title">Catalog</h2>
+            <h2 id="catalog-title" class="catalog-title">CATALOGE</h2>
             <div id="catalog-count" class="catalog-count"></div>
           </div>
           <div class="catalog-tools">
-            <input id="search" class="input" type="search" placeholder="ค้นหาสินค้า" aria-label="ค้นหาสินค้า">
-            <select id="sort" class="input" aria-label="เรียงลำดับ">
-              <option value="default">เรียงตามค่าเริ่มต้น</option>
-              <option value="low">ราคาน้อยไปมาก</option>
-              <option value="high">ราคามากไปน้อย</option>
+            <input id="search" class="input" type="search" placeholder="SEARCH" aria-label="Search">
+            <select id="sort" class="input" aria-label="Sort by">
+              <option value="">SORT BY</option>
+              <option value="low">price [low-high]</option>
+              <option value="newest">Newest</option>
+              <option value="top">Top Sellers</option>
+              <option value="high">Price [high-low]</option>
             </select>
           </div>
         </div>
@@ -54,8 +56,8 @@
 
   <footer id="site-footer" class="site-footer"></footer>
 
-  <script src="js/config.js?v=13"></script>
-  <script src="js/products.js?v=13"></script>
-  <script src="js/app.js?v=13"></script>
+  <script src="js/config.js?v=15"></script>
+  <script src="js/products.js?v=15"></script>
+  <script src="js/app.js?v=15"></script>
 </body>
 </html>
