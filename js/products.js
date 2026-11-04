@@ -197,7 +197,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/postcard-fanart.webp"],
-    details: ["4x6 inch", "1ea"]
+    details: ["4x6 inch", "1ea", "@betoeewtt"]
   },
   {
     id: "keycap-wonbin",
