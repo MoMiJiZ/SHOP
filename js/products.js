@@ -14,7 +14,7 @@ const PRODUCTS = [
       { label: "Options 01", image: "images/p/magazine-wonbin-01.webp" },
       { label: "Options 02", image: "images/p/magazine-wonbin-02.webp" }
     ],
-    details: ["A4 Size Poster", "Quantity: 1 ea"]
+    details: ["A4 size poster", "1 ea"]
   },
   {
     id: "id-card-sungchan",
@@ -25,7 +25,7 @@ const PRODUCTS = [
     added: 1,
     sold: 1,
     images: ["images/p/id-card-sungchan.webp"],
-    details: []
+    details: ["A7 size photocard", "1 ea"]
   },
   {
     id: "newspaper-sungchan",
@@ -35,7 +35,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/newspaper-sungchan.webp"],
-    details: []
+    details: ["Random 1ea poster", "A3 size"]
   },
   {
     id: "price-tag",
@@ -49,7 +49,7 @@ const PRODUCTS = [
       { label: "Options 01", image: "images/p/price-tag-01.webp" },
       { label: "Options 02", image: "images/p/price-tag-02.webp" }
     ],
-    details: []
+    details: ["8x4.5cm", "1 ea"]
   },
   {
     id: "lanyard",
@@ -58,12 +58,14 @@ const PRODUCTS = [
     category: "GIVE A WAY",
     added: 1,
     sold: 0,
-    images: ["images/p/lanyard.webp"],
+    images: ["images/p/lanyard.webp", "images/p/lanyard-02.webp", "images/p/lanyard-03.webp", "images/p/lanyard-04.webp"],
     options: [
       { label: "Options 01", image: "images/p/lanyard.webp" },
-      { label: "Options 02", image: "images/p/lanyard.webp" }
+      { label: "Options 02", image: "images/p/lanyard-02.webp" },
+      { label: "Options 03", image: "images/p/lanyard-03.webp" },
+      { label: "Options 04", image: "images/p/lanyard-04.webp" }
     ],
-    details: []
+    details: ["2x92cm", "1 ea"]
   },
   {
     id: "magazine-sungchan",
@@ -79,7 +81,7 @@ const PRODUCTS = [
       { label: "Options 01", image: "images/p/magazine-sungchan-01.webp" },
       { label: "Options 02", image: "images/p/magazine-sungchan-02.webp" }
     ],
-    details: []
+    details: ["A4 size poster", "1 ea"]
   },
   {
     id: "plastic-bag",
@@ -89,7 +91,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/plastic-bag.webp"],
-    details: []
+    details: ["35x25x10cm", "1ea"]
   },
   {
     id: "id-card-wonbin",
@@ -99,7 +101,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/id-card-wonbin.webp"],
-    details: ["A7 Size", "Quantity: 1 ea"]
+    details: ["A7 size photocard", "1 ea"]
   },
   {
     id: "id-photo-wonbin",
@@ -109,7 +111,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/id-photo-wonbin.webp"],
-    details: []
+    details: ["1.5 inch", "1ea"]
   },
   {
     id: "sticker",
@@ -119,7 +121,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/sticker.webp"],
-    details: []
+    details: ["5x5cm", "2 ea"]
   },
   {
     id: "newspaper-wonbin",
@@ -129,7 +131,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/newspaper-wonbin.webp"],
-    details: []
+    details: ["Random 1ea poster", "A3 size"]
   },
   {
     id: "id-card-workshop",
@@ -139,7 +141,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/id-card-workshop.webp"],
-    details: []
+    details: ["A7 size photocard", "1 ea"]
   },
   {
     id: "paper-cup",
@@ -148,12 +150,14 @@ const PRODUCTS = [
     category: "GIVE A WAY",
     added: 1,
     sold: 0,
-    images: ["images/p/paper-cup.webp"],
+    images: ["images/p/paper-cup.webp", "images/p/paper-cup-02.webp", "images/p/paper-cup-03.webp", "images/p/paper-cup-04.webp"],
     options: [
       { label: "Options 01", image: "images/p/paper-cup.webp" },
-      { label: "Options 02", image: "images/p/paper-cup.webp" }
+      { label: "Options 02", image: "images/p/paper-cup-02.webp" },
+      { label: "Options 03", image: "images/p/paper-cup-03.webp" },
+      { label: "Options 04", image: "images/p/paper-cup-04.webp" }
     ],
-    details: []
+    details: ["9 oz", "1 ea"]
   },
   {
     id: "photoboots",
@@ -163,7 +167,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/photoboots.webp"],
-    details: []
+    details: ["55x85 mm photocard 4cut", "1 ea"]
   },
   {
     id: "keycap-sungchan",
@@ -173,7 +177,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/keycap-sungchan.webp"],
-    details: []
+    details: ["random", "1ea"]
   },
   {
     id: "id-photo-sungchan",
@@ -183,7 +187,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/id-photo-sungchan.webp"],
-    details: []
+    details: ["1.5 inch", "1ea"]
   },
   {
     id: "postcard-fanart",
@@ -193,7 +197,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/postcard-fanart.webp"],
-    details: []
+    details: ["4x6 inch", "1ea"]
   },
   {
     id: "keycap-wonbin",
@@ -203,7 +207,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: ["images/p/keycap-wonbin.webp"],
-    details: []
+    details: ["random", "1ea"]
   },
   {
     id: "set-01",
@@ -213,7 +217,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: [],
-    details: []
+    details: ["vanilla latte + strawberry cheesecake"]
   },
   {
     id: "set-02",
@@ -223,7 +227,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: [],
-    details: []
+    details: ["Cocoa + lemon cheesecake"]
   },
   {
     id: "set-03",
@@ -233,7 +237,7 @@ const PRODUCTS = [
     added: 1,
     sold: 0,
     images: [],
-    details: []
+    details: ["lemon tea + shiopan"]
   },
   {
     id: "special",
