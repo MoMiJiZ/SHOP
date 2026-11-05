@@ -22,41 +22,41 @@
 
   <main class="section">
     <div class="container">
-      <h1 class="page-title">Checkout</h1>
+      <h1 class="page-title" data-i18n="checkout_title">Checkout</h1>
 
-      <p id="checkout-empty" class="empty" hidden>Your cart is empty. <a href="index.html">Continue shopping</a></p>
+      <p id="checkout-empty" class="empty" data-i18n-empty hidden>Your cart is empty. <a href="index.html">Continue shopping</a></p>
 
       <div class="cart-layout">
         <form id="checkout-form" class="checkout-form" novalidate>
-          <h2>Shipping details</h2>
+          <h2 data-i18n="ship_details">Shipping details</h2>
           <label class="field">
-            <span>Full name</span>
+            <span data-i18n="full_name">Full name</span>
             <input class="input" name="name" autocomplete="name">
             <small class="error" data-err="name"></small>
           </label>
           <label class="field">
-            <span>Phone</span>
+            <span data-i18n="phone">Phone</span>
             <input class="input" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0812345678">
             <small class="error" data-err="phone"></small>
           </label>
           <label class="field">
-            <span>Shipping address</span>
-            <textarea class="input" name="address" rows="3" autocomplete="street-address" placeholder="House no., street, subdistrict, district, province, postal code"></textarea>
+            <span data-i18n="address">Shipping address</span>
+            <textarea class="input" name="address" rows="3" autocomplete="street-address" placeholder="House no., street, subdistrict, district, province, postal code" data-i18n-ph="address_ph"></textarea>
             <small class="error" data-err="address"></small>
           </label>
           <label class="field">
-            <span>Note (optional)</span>
+            <span data-i18n="note">Note (optional)</span>
             <input class="input" name="note">
           </label>
 
-          <h2>Payment method</h2>
+          <h2 data-i18n="pay_method">Payment method</h2>
           <div id="pay-options" class="pay-options"></div>
 
-          <button type="submit" class="btn btn-dark btn-block">Place order</button>
+          <button type="submit" class="btn btn-dark btn-block" data-i18n="place_order">Place order</button>
         </form>
 
         <aside id="checkout-summary" class="summary">
-          <h2>Your order</h2>
+          <h2 data-i18n="your_order">Your order</h2>
           <div class="sum-items"></div>
           <div class="sum-lines"></div>
         </aside>
@@ -68,6 +68,6 @@
 
   <footer id="site-footer" class="site-footer"></footer>
 
-  <script>(function(t){["config","products","app"].forEach(function(n){document.write('<script src="js/'+n+'.js?t='+t+'"><\/script>')})})(Date.now())</script>
+  <script>(function(t){["config","products","i18n","app"].forEach(function(n){document.write('<script src="js/'+n+'.js?t='+t+'"><\/script>')})})(Date.now())</script>
 </body>
 </html>

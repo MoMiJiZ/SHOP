@@ -33,17 +33,17 @@
       <div class="container">
         <div class="catalog-head">
           <div>
-            <h2 id="catalog-title" class="catalog-title">CATALOGE</h2>
+            <h2 id="catalog-title" class="catalog-title" data-i18n="catalog_title">CATALOGE</h2>
             <div id="catalog-count" class="catalog-count"></div>
           </div>
           <div class="catalog-tools">
-            <input id="search" class="input" type="search" placeholder="SEARCH" aria-label="Search">
+            <input id="search" class="input" type="search" placeholder="SEARCH" data-i18n-ph="search" aria-label="Search">
             <select id="sort" class="input" aria-label="Sort by">
-              <option value="">SORT BY</option>
-              <option value="low">price [low-high]</option>
-              <option value="newest">Newest</option>
-              <option value="top">Top Sellers</option>
-              <option value="high">Price [high-low]</option>
+              <option value="" data-i18n="sort_by">SORT BY</option>
+              <option value="low" data-i18n="sort_low">price [low-high]</option>
+              <option value="newest" data-i18n="sort_newest">Newest</option>
+              <option value="top" data-i18n="sort_top">Top Sellers</option>
+              <option value="high" data-i18n="sort_high">Price [high-low]</option>
             </select>
           </div>
         </div>
@@ -57,6 +57,6 @@
 
   <footer id="site-footer" class="site-footer"></footer>
 
-  <script>(function(t){["config","products","app"].forEach(function(n){document.write('<script src="js/'+n+'.js?t='+t+'"><\/script>')})})(Date.now())</script>
+  <script>(function(t){["config","products","i18n","app"].forEach(function(n){document.write('<script src="js/'+n+'.js?t='+t+'"><\/script>')})})(Date.now())</script>
 </body>
 </html>

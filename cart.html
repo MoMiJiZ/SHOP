@@ -22,14 +22,14 @@
 
   <main class="section">
     <div class="container">
-      <h1 class="page-title">Cart</h1>
+      <h1 class="page-title" data-i18n="cart_title">Cart</h1>
       <div class="cart-layout">
         <div id="cart-list" class="cart-list"></div>
         <aside id="cart-summary" class="summary" hidden>
-          <h2>Order summary</h2>
+          <h2 data-i18n="order_summary">Order summary</h2>
           <div class="sum-lines"></div>
-          <a href="checkout.html" class="btn btn-dark btn-block">Checkout</a>
-          <a href="index.html" class="btn btn-block">Continue shopping</a>
+          <a href="checkout.html" class="btn btn-dark btn-block" data-i18n="go_checkout">Checkout</a>
+          <a href="index.html" class="btn btn-block" data-i18n="continue">Continue shopping</a>
         </aside>
       </div>
     </div>
@@ -37,6 +37,6 @@
 
   <footer id="site-footer" class="site-footer"></footer>
 
-  <script>(function(t){["config","products","app"].forEach(function(n){document.write('<script src="js/'+n+'.js?t='+t+'"><\/script>')})})(Date.now())</script>
+  <script>(function(t){["config","products","i18n","app"].forEach(function(n){document.write('<script src="js/'+n+'.js?t='+t+'"><\/script>')})})(Date.now())</script>
 </body>
 </html>

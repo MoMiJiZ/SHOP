@@ -114,21 +114,29 @@
     return SHOP.facebook || SHOP.instagram || SHOP.tiktok || "";
   }
 
+  function langSelect(id) {
+    return '<select id="' + id + '" class="lang-select" aria-label="' + esc(T("language")) + '">' +
+      LANGS.map(function (l) { return '<option value="' + l.code + '"' + (l.code === LANG ? " selected" : "") + ">" + l.label + "</option>"; }).join("") +
+      "</select>";
+  }
+
   function renderHeader() {
     const el = document.getElementById("site-header");
     if (!el) return;
     const home = pageName() === "home" ? "" : "index.html";
     el.innerHTML =
-      (SHOP.announcement ? '<div class="announce">' + esc(SHOP.announcement) + "</div>" : "") +
+      (SHOP.announcement ? '<div class="announce">' + esc(SHOP.freeShippingMin ? T("announce", SHOP.freeShippingMin) : SHOP.announcement) + "</div>" : "") +
       '<div class="header-bar">' +
         '<div class="container header-inner">' +
           '<button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">' + ICON.menu + "</button>" +
           '<nav class="nav" id="main-nav">' +
-            '<a href="' + home + '#catalog">CATALOGE</a>' +
-            '<a href="' + home + '#about">ABOUT</a>' +
+            '<a href="' + home + '#catalog">' + esc(T("nav_catalog")) + '</a>' +
+            '<a href="' + home + '#about">' + esc(T("nav_about")) + '</a>' +
+            '<div class="nav-lang">' + langSelect("lang-select-m") + "</div>" +
           "</nav>" +
           '<a href="index.html" class="brand">' + brandHTML() + "</a>" +
           '<div class="header-icons">' +
+            langSelect("lang-select") +
             '<a href="' + home + '#catalog" class="icon-btn" id="search-link" aria-label="Search">' + ICON.search + "</a>" +
             '<a href="cart.html" class="icon-btn cart-link" aria-label="Cart">' + ICON.bag +
               '<span class="cart-badge" id="cart-badge">0</span></a>' +
@@ -151,6 +159,7 @@
         if (s) s.focus({ preventScroll: true });
       }, 300);
     });
+    document.querySelectorAll(".lang-select").forEach(function (sel) { sel.addEventListener("change", function (e) { setLang(e.target.value); }); });
     updateCartBadge();
   }
 
@@ -162,7 +171,7 @@
       return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + label + "</a>" : "";
     }
     const contact = [
-      SHOP.phone ? "<span>Tel " + esc(SHOP.phone) + "</span>" : "",
+      SHOP.phone ? "<span>" + esc(T("tel")) + " " + esc(SHOP.phone) + "</span>" : "",
       SHOP.lineOA ? ext("https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineOA), "LINE " + esc(SHOP.lineOA)) : "",
       SHOP.email ? '<a href="mailto:' + esc(SHOP.email) + '">' + esc(SHOP.email) + "</a>" : "",
       SHOP.address ? "<span>" + esc(SHOP.address) + "</span>" : ""
@@ -172,14 +181,14 @@
     el.innerHTML =
       '<div class="container">' +
         '<div class="footer-grid">' +
-          '<div class="footer-col footer-about" id="about"><h4>About Us</h4>' +
+          '<div class="footer-col footer-about" id="about"><h4>' + esc(T("f_about")) + '</h4>' +
             "<span>" + esc(SHOP.about || SHOP.name) + "</span>" +
           "</div>" +
-          '<div class="footer-col"><h4>Menu</h4>' +
-            '<a href="' + home + '#catalog">Catalog</a>' +
+          '<div class="footer-col"><h4>' + esc(T("f_menu")) + '</h4>' +
+            '<a href="' + home + '#catalog">' + esc(T("f_catalog")) + '</a>' +
           "</div>" +
-          '<div class="footer-col"><h4>Contact Us</h4>' + (contact || "<span>-</span>") + "</div>" +
-          '<div class="footer-col"><h4>Follow Us</h4>' + (social || "<span>-</span>") + "</div>" +
+          '<div class="footer-col"><h4>' + esc(T("f_contact")) + '</h4>' + (contact || "<span>-</span>") + "</div>" +
+          '<div class="footer-col"><h4>' + esc(T("f_follow")) + '</h4>' + (social || "<span>-</span>") + "</div>" +
         "</div>" +
       "</div>";
   }
@@ -210,11 +219,11 @@
   
   function productCard(p) {
     const url = "product.html?id=" + encodeURIComponent(p.id);
-    const badgeText = p.soldOut ? "SOLD OUT" : (p.badge || "");
+    const badgeText = p.soldOut ? T("sold_out") : (p.badge ? T("badge:" + p.badge) : "");
     let action;
-    if (p.soldOut) action = '<span class="card-btn is-disabled">SOLD OUT</span>';
-    else if (p.options && p.options.length) action = '<a class="card-btn" href="' + url + '">SELECT OPTIONS</a>';
-    else action = '<button type="button" class="card-btn" data-add="' + esc(p.id) + '">ADD TO CART</button>';
+    if (p.soldOut) action = '<span class="card-btn is-disabled">' + esc(T("sold_out")) + '</span>';
+    else if (p.options && p.options.length) action = '<a class="card-btn" href="' + url + '">' + esc(T("select_options")) + '</a>';
+    else action = '<button type="button" class="card-btn" data-add="' + esc(p.id) + '">' + esc(T("card_add")) + '</button>';
 
     return (
       '<article class="card' + (p.soldOut ? " is-soldout" : "") + '">' +
@@ -238,7 +247,7 @@
     const btn = e.target.closest("[data-add]");
     if (!btn) return;
     Cart.add(btn.dataset.add, "", 1);
-    toast("Added to cart");
+    toast(T("added"));
   });
 
   
@@ -361,17 +370,17 @@
         "</div>";
     }
 
-    document.getElementById("catalog-title").textContent = SHOP.catalogTitle || "CATALOGE";
+    document.getElementById("catalog-title").textContent = T("catalog_title");
     const filterBox = document.getElementById("filters");
     const grid = document.getElementById("product-grid");
     const search = document.getElementById("search");
     const sort = document.getElementById("sort");
-    const ALL = SHOP.allLabel || "ALL";
+    const ALL = "ALL";
     let activeCat = ALL;
 
     const cats = [ALL].concat(CATEGORIES);
     filterBox.innerHTML = cats.map(function (c) {
-      return '<button type="button" class="chip' + (c === activeCat ? " active" : "") + '" data-cat="' + esc(c) + '">' + esc(c) + "</button>";
+      return '<button type="button" class="chip' + (c === activeCat ? " active" : "") + '" data-cat="' + esc(c) + '">' + esc(c === ALL ? T("all") : T("cat:" + c)) + "</button>";
     }).join("");
 
     filterBox.addEventListener("click", function (e) {
@@ -401,9 +410,9 @@
       }[sort.value];
       if (by) list = list.slice().sort(by);
 
-      document.getElementById("catalog-count").textContent = list.length + " ITEMS";
+      document.getElementById("catalog-count").textContent = T("items", list.length);
       if (!list.length) {
-        grid.innerHTML = '<p class="empty">No items found</p>';
+        grid.innerHTML = '<p class="empty">' + esc(T("no_items")) + '</p>';
         return;
       }
       const cards = list.map(productCard);
@@ -424,10 +433,10 @@
     const box = document.getElementById("product-detail");
     const p = findProduct(qs("id"));
     if (!p) {
-      box.innerHTML = '<p class="empty">Item not found. <a href="index.html#catalog">Back to CATALOGE</a></p>';
+      box.innerHTML = '<p class="empty">' + esc(T("not_found")) + ' <a href="index.html#catalog">' + esc(T("back_catalog")) + '</a></p>';
       return;
     }
-    const title = p.name + (p.soldOut ? " (SOLD OUT)" : "");
+    const title = p.name + (p.soldOut ? " (" + T("sold_out") + ")" : "");
     document.title = p.name + " | " + SHOP.name;
     const imgs = (p.images || []).slice();
     const opts = p.options || [];
@@ -448,26 +457,26 @@
             : "") +
         "</div>" +
         '<div class="info">' +
-          '<a href="index.html#catalog" class="back">← CATALOGE</a>' +
-          '<div class="info-cat">' + esc(p.category) + "</div>" +
+          '<a href="index.html#catalog" class="back">' + esc(T("back_link")) + '</a>' +
+          '<div class="info-cat">' + esc(T("cat:" + p.category)) + "</div>" +
           '<h1 class="info-title">' + esc(title) + "</h1>" +
           '<div class="detail-price"><span class="price">' + money(p.price) + "</span>" +
             (p.oldPrice ? '<s class="old-price">' + money(p.oldPrice) + "</s>" : "") + "</div>" +
           (opts.length
-            ? '<label class="field"><span>Options</span><select id="opt" class="input">' +
+            ? '<label class="field"><span>' + esc(T("options")) + '</span><select id="opt" class="input">' +
                 opts.map(function (o) { return '<option value="' + esc(o.label) + '">' + esc(o.label) + "</option>"; }).join("") +
               "</select></label>"
             : "") +
-          '<div class="field"><span>Quantity</span>' +
+          '<div class="field"><span>' + esc(T("quantity")) + '</span>' +
             '<div class="qty"><button type="button" data-step="-1" aria-label="Decrease">−</button>' +
             '<input id="qty" type="number" min="1" value="1" inputmode="numeric" aria-label="Quantity">' +
             '<button type="button" data-step="1" aria-label="Increase">+</button></div>' +
           "</div>" +
           (p.soldOut
-            ? '<button class="btn btn-block btn-soldout" disabled>SOLD OUT</button>'
-            : '<button id="add-btn" class="btn btn-primary btn-block">Add to Cart</button>' +
-              '<button id="buy-btn" class="btn btn-block">Buy Now</button>') +
-          '<div class="desc"><h2 class="desc-title">Product Details</h2>' +
+            ? '<button class="btn btn-block btn-soldout" disabled>' + esc(T("sold_out")) + '</button>'
+            : '<button id="add-btn" class="btn btn-primary btn-block">' + esc(T("add_to_cart")) + '</button>' +
+              '<button id="buy-btn" class="btn btn-block">' + esc(T("buy_now")) + '</button>') +
+          '<div class="desc"><h2 class="desc-title">' + esc(T("details")) + '</h2>' +
             '<ul class="desc-list">' + details.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>" +
           "</div>" +
         "</div>" +
@@ -509,7 +518,7 @@
     }
     const addBtn = document.getElementById("add-btn");
     if (addBtn) {
-      addBtn.addEventListener("click", function () { addToCart(); toast("Added to cart"); });
+      addBtn.addEventListener("click", function () { addToCart(); toast(T("added")); });
       document.getElementById("buy-btn").addEventListener("click", function () {
         addToCart(); location.href = "cart.html";
       });
@@ -522,16 +531,16 @@
     const cod = withCod ? (SHOP.payment.codFee || 0) : 0;
     let note = "";
     if (SHOP.freeShippingMin > 0 && sub > 0 && sub < SHOP.freeShippingMin) {
-      note = '<div class="ship-note">Add ' + money(SHOP.freeShippingMin - sub) + " more for free shipping</div>";
+      note = '<div class="ship-note">' + esc(T("ship_more", money(SHOP.freeShippingMin - sub))) + "</div>";
     }
     return {
       total: sub + ship + cod,
       sub: sub, ship: ship, cod: cod,
       html:
-        '<div class="sum-row"><span>Subtotal</span><span>' + money(sub) + "</span></div>" +
-        '<div class="sum-row"><span>Shipping</span><span>' + (ship === 0 ? "Free" : money(ship)) + "</span></div>" +
-        (cod ? '<div class="sum-row"><span>COD fee</span><span>' + money(cod) + "</span></div>" : "") +
-        '<div class="sum-row sum-total"><span>Total</span><span>' + money(sub + ship + cod) + "</span></div>" +
+        '<div class="sum-row"><span>' + esc(T("subtotal")) + '</span><span>' + money(sub) + "</span></div>" +
+        '<div class="sum-row"><span>' + esc(T("shipping")) + '</span><span>' + (ship === 0 ? T("free") : money(ship)) + "</span></div>" +
+        (cod ? '<div class="sum-row"><span>' + esc(T("cod_fee")) + '</span><span>' + money(cod) + "</span></div>" : "") +
+        '<div class="sum-row sum-total"><span>' + esc(T("total")) + '</span><span>' + money(sub + ship + cod) + "</span></div>" +
         note
     };
   }
@@ -543,7 +552,7 @@
     function draw() {
       const items = Cart.items();
       if (!items.length) {
-        list.innerHTML = '<p class="empty">Your cart is empty. <a href="index.html">Continue shopping</a></p>';
+        list.innerHTML = '<p class="empty">' + esc(T("cart_empty")) + ' <a href="index.html">' + esc(T("continue")) + '</a></p>';
         sum.hidden = true;
         return;
       }
@@ -555,7 +564,7 @@
             imageBox(p, "ci-img", false) +
             '<div class="ci-info">' +
               '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="ci-name">' + esc(p.name) + "</a>" +
-              (it.option ? '<div class="ci-opt">Option: ' + esc(it.option) + "</div>" : "") +
+              (it.option ? '<div class="ci-opt">' + esc(T("option")) + ': ' + esc(it.option) + "</div>" : "") +
               '<div class="ci-price">' + money(p.price) + "</div>" +
             "</div>" +
             '<div class="qty qty-sm"><button type="button" data-act="dec" aria-label="Decrease">−</button>' +
@@ -604,8 +613,8 @@
     }
 
     const pays = [];
-    if (SHOP.payment.transfer) pays.push({ v: "transfer", t: "Bank transfer / PromptPay" });
-    if (SHOP.payment.cod) pays.push({ v: "cod", t: "Cash on delivery" + (SHOP.payment.codFee ? " (+" + money(SHOP.payment.codFee) + ")" : "") });
+    if (SHOP.payment.transfer) pays.push({ v: "transfer", t: T("pay_transfer") });
+    if (SHOP.payment.cod) pays.push({ v: "cod", t: T("pay_cod") + (SHOP.payment.codFee ? " (+" + money(SHOP.payment.codFee) + ")" : "") });
     payBox.innerHTML = pays.map(function (p, i) {
       return '<label class="radio"><input type="radio" name="pay" value="' + p.v + '"' + (i === 0 ? " checked" : "") + "> " + esc(p.t) + "</label>";
     }).join("");
@@ -641,9 +650,9 @@
         form.querySelector('[data-err="' + field + '"]').textContent = msg;
         ok = false;
       }
-      if (!name) err("name", "Please enter your name");
-      if (!/^0\d{8,9}$/.test(phone.replace(/[\s-]/g, ""))) err("phone", "Please enter a 9–10 digit phone number");
-      if (address.length < 10) err("address", "Please enter your full shipping address");
+      if (!name) err("name", T("err_name"));
+      if (!/^0\d{8,9}$/.test(phone.replace(/[\s-]/g, ""))) err("phone", T("err_phone"));
+      if (address.length < 10) err("address", T("err_addr"));
       if (!ok) return;
 
       const cod = isCod();
@@ -686,27 +695,27 @@
         : "https://line.me/R/msg/text/?" + encodeURIComponent(text);
 
       const payInfo = cod ? "" :
-        '<div class="pay-info"><h3>Payment details</h3>' +
-          "<p>Amount to transfer <strong>" + money(total) + "</strong></p>" +
+        '<div class="pay-info"><h3>' + esc(T("pay_details")) + '</h3>' +
+          "<p>" + esc(T("amount")) + " <strong>" + money(total) + "</strong></p>" +
           (SHOP.payment.bankInfo ? "<p>" + esc(SHOP.payment.bankInfo) + "</p>" : "") +
           (SHOP.payment.promptpay ? "<p>" + esc(SHOP.payment.promptpay) + "</p>" : "") +
           (SHOP.payment.qrImage ? '<img class="qr" src="' + esc(SHOP.payment.qrImage) + '" alt="PromptPay QR">' : "") +
-          "<p>After transferring, send the payment slip with your order via LINE.</p>" +
+          "<p>" + esc(T("slip")) + "</p>" +
         "</div>";
 
       result.innerHTML =
-        "<h2>Order summary</h2>" +
-        "<p>Order no. " + esc(orderNo) + " — your order is complete once you send this to the shop.</p>" +
+        "<h2>" + esc(T("summary")) + "</h2>" +
+        "<p>" + esc(T("order_no", orderNo)) + "</p>" +
         '<pre class="order-text" id="order-text">' + esc(text) + "</pre>" +
         '<div class="result-actions">' +
-          '<a class="btn btn-primary" id="line-btn" href="' + esc(lineUrl) + '" target="_blank" rel="noopener">Send order via LINE</a>' +
-          '<button class="btn" id="copy-btn" type="button">Copy order</button>' +
+          '<a class="btn btn-primary" id="line-btn" href="' + esc(lineUrl) + '" target="_blank" rel="noopener">' + esc(T("send_line")) + '</a>' +
+          '<button class="btn" id="copy-btn" type="button">' + esc(T("copy")) + '</button>' +
         "</div>" +
         payInfo +
-        '<p><a href="index.html">Back to shop</a></p>';
+        '<p><a href="index.html">' + esc(T("back_shop")) + '</a></p>';
 
       document.getElementById("copy-btn").addEventListener("click", function () {
-        copyText(text).then(function () { toast("Copied"); }, function () { toast("Copy failed. Press and hold the text to copy it."); });
+        copyText(text).then(function () { toast(T("copied")); }, function () { toast(T("copy_fail")); });
       });
       window.scrollTo(0, 0);
     }
