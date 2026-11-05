@@ -110,7 +110,7 @@ const PRODUCTS = [
     category: "GIVE A WAY",
     added: 1,
     sold: 0,
-    images: ["images/p/id-photo-wonbin.webp"],
+    images: ["images/p/id-photo-wonbin-v2.webp"],
     details: ["1.5 inch", "1ea"]
   },
   {
@@ -186,7 +186,7 @@ const PRODUCTS = [
     category: "GIVE A WAY",
     added: 1,
     sold: 0,
-    images: ["images/p/id-photo-sungchan.webp"],
+    images: ["images/p/id-photo-sungchan-v2.webp"],
     details: ["1.5 inch", "1ea"]
   },
   {
@@ -214,9 +214,10 @@ const PRODUCTS = [
     name: "SET 01 VANILLA LATTE, BINNIE (STRAW) BERRY BABE",
     price: 255,
     category: "SET MENU",
+    badge: "BEST SELLER",
     added: 1,
     sold: 0,
-    images: [],
+    images: ["images/p/set-01.webp"],
     details: ["vanilla latte + strawberry cheesecake"]
   },
   {
@@ -224,9 +225,10 @@ const PRODUCTS = [
     name: "SET 02 SUNGCHAN'S CHOCO HEART, LEMON (CHEESE) CRUSH",
     price: 255,
     category: "SET MENU",
+    badge: "BEST SELLER",
     added: 1,
     sold: 0,
-    images: [],
+    images: ["images/p/set-02.webp"],
     details: ["Cocoa + lemon cheesecake"]
   },
   {
@@ -234,9 +236,10 @@ const PRODUCTS = [
     name: "SET 03 LEMON TASTE, WITH (SUNG)CHANPAN",
     price: 255,
     category: "SET MENU",
+    badge: "BEST SELLER",
     added: 1,
     sold: 0,
-    images: [],
+    images: ["images/p/set-03.webp"],
     details: ["lemon tea + shiopan"]
   },
   {
