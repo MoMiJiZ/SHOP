@@ -244,14 +244,13 @@ const PRODUCTS = [
   },
   {
     id: "special",
-    name: "SPECIAL",
+    name: "SPECIAL WORKSHOP",
     price: 1020,
     category: "GIVE A WAY",
     added: 1,
     sold: 0,
     soldOut: true,
-    placeholder: "SPECIAL",
-    images: [],
+    images: ["images/p/special-workshop.webp"],
     details: []
   }
 ];

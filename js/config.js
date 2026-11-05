@@ -21,7 +21,7 @@ const SHOP = {
   },
 
   showFeatured: false,
-  featuredTitle: "สินค้าแนะนำ",
+  featuredTitle: "Featured",
   featuredIds: [],
 
   stories: [],
@@ -34,10 +34,10 @@ const SHOP = {
   ],
 
   community: {
-    title: "ชุมชนของเรา",
-    text: "พื้นที่สำหรับลูกค้าที่ชอบสินค้าของร้าน ติดตามเพื่อรับข่าวสินค้าใหม่และโปรโมชันก่อนใคร",
+    title: "Community",
+    text: "",
     images: [],
-    buttonText: "ติดตามร้าน",
+    buttonText: "Follow",
     buttonLink: ""
   },
 
@@ -55,8 +55,8 @@ const SHOP = {
     transfer: true,
     cod: true,
     codFee: 20,
-    bankInfo: "ธนาคาร ......  เลขบัญชี xxx-x-xxxxx-x  ชื่อบัญชี ......",
-    promptpay: "พร้อมเพย์ 08x-xxx-xxxx",
+    bankInfo: "Bank ......  Account no. xxx-x-xxxxx-x  Account name ......",
+    promptpay: "PromptPay 08x-xxx-xxxx",
     qrImage: ""
   },
 

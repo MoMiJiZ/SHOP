@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>สั่งซื้อCheckout | 1020 Spectrum</title>
+  <title>Checkout | 1020 Spectrum</title>
   <meta name="description" content="1020 Spectrum online shop. Choose items, add to cart and order via LINE.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="1020 Spectrum">
-  <meta property="og:title" content="สั่งซื้อCheckout | 1020 Spectrum">
+  <meta property="og:title" content="Checkout | 1020 Spectrum">
   <meta property="og:image" content="https://www.1020spectrum.com/images/hero.jpg">
   <meta property="og:image:width" content="1500">
   <meta property="og:image:height" content="500">
@@ -22,41 +22,41 @@
 
   <main class="section">
     <div class="container">
-      <h1 class="page-title">สั่งซื้อสินค้า</h1>
+      <h1 class="page-title">Checkout</h1>
 
-      <p id="checkout-empty" class="empty" hidden>ยังไม่มีสินค้าในตะกร้า <a href="index.html">เลือกซื้อสินค้า</a></p>
+      <p id="checkout-empty" class="empty" hidden>Your cart is empty. <a href="index.html">Continue shopping</a></p>
 
       <div class="cart-layout">
         <form id="checkout-form" class="checkout-form" novalidate>
-          <h2>ข้อมูลผู้รับ</h2>
+          <h2>Shipping details</h2>
           <label class="field">
-            <span>ชื่อ-นามสกุล</span>
+            <span>Full name</span>
             <input class="input" name="name" autocomplete="name">
             <small class="error" data-err="name"></small>
           </label>
           <label class="field">
-            <span>เบอร์โทร</span>
+            <span>Phone</span>
             <input class="input" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0812345678">
             <small class="error" data-err="phone"></small>
           </label>
           <label class="field">
-            <span>ที่อยู่จัดส่ง</span>
-            <textarea class="input" name="address" rows="3" autocomplete="street-address" placeholder="บ้านเลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
+            <span>Shipping address</span>
+            <textarea class="input" name="address" rows="3" autocomplete="street-address" placeholder="House no., street, subdistrict, district, province, postal code"></textarea>
             <small class="error" data-err="address"></small>
           </label>
           <label class="field">
-            <span>หมายเหตุ (ถ้ามี)</span>
+            <span>Note (optional)</span>
             <input class="input" name="note">
           </label>
 
-          <h2>วิธีชำระเงิน</h2>
+          <h2>Payment method</h2>
           <div id="pay-options" class="pay-options"></div>
 
-          <button type="submit" class="btn btn-dark btn-block">ยืนยันคำสั่งซื้อ</button>
+          <button type="submit" class="btn btn-dark btn-block">Place order</button>
         </form>
 
         <aside id="checkout-summary" class="summary">
-          <h2>รายการสินค้า</h2>
+          <h2>Your order</h2>
           <div class="sum-items"></div>
           <div class="sum-lines"></div>
         </aside>

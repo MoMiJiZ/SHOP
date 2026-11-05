@@ -122,15 +122,15 @@
       (SHOP.announcement ? '<div class="announce">' + esc(SHOP.announcement) + "</div>" : "") +
       '<div class="header-bar">' +
         '<div class="container header-inner">' +
-          '<button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="เปิดเมนู" aria-expanded="false">' + ICON.menu + "</button>" +
+          '<button type="button" class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false">' + ICON.menu + "</button>" +
           '<nav class="nav" id="main-nav">' +
             '<a href="' + home + '#catalog">CATALOGE</a>' +
             '<a href="' + home + '#about">ABOUT</a>' +
           "</nav>" +
           '<a href="index.html" class="brand">' + brandHTML() + "</a>" +
           '<div class="header-icons">' +
-            '<a href="' + home + '#catalog" class="icon-btn" id="search-link" aria-label="ค้นหาสินค้า">' + ICON.search + "</a>" +
-            '<a href="cart.html" class="icon-btn cart-link" aria-label="ตะกร้าสินค้า">' + ICON.bag +
+            '<a href="' + home + '#catalog" class="icon-btn" id="search-link" aria-label="Search">' + ICON.search + "</a>" +
+            '<a href="cart.html" class="icon-btn cart-link" aria-label="Cart">' + ICON.bag +
               '<span class="cart-badge" id="cart-badge">0</span></a>' +
           "</div>" +
         "</div>" +
@@ -162,7 +162,7 @@
       return url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener">' + label + "</a>" : "";
     }
     const contact = [
-      SHOP.phone ? "<span>โทร " + esc(SHOP.phone) + "</span>" : "",
+      SHOP.phone ? "<span>Tel " + esc(SHOP.phone) + "</span>" : "",
       SHOP.lineOA ? ext("https://line.me/R/ti/p/" + encodeURIComponent(SHOP.lineOA), "LINE " + esc(SHOP.lineOA)) : "",
       SHOP.email ? '<a href="mailto:' + esc(SHOP.email) + '">' + esc(SHOP.email) + "</a>" : "",
       SHOP.address ? "<span>" + esc(SHOP.address) + "</span>" : ""
@@ -301,10 +301,10 @@
     } else {
       feat.innerHTML =
         '<div class="container">' +
-          '<div class="section-head"><h2>' + esc(SHOP.featuredTitle || "สินค้าแนะนำ") + "</h2>" +
+          '<div class="section-head"><h2>' + esc(SHOP.featuredTitle || "Featured") + "</h2>" +
             '<div class="slider-nav">' +
-              '<button type="button" class="icon-btn round" data-dir="-1" aria-label="เลื่อนซ้าย">' + ICON.left + "</button>" +
-              '<button type="button" class="icon-btn round" data-dir="1" aria-label="เลื่อนขวา">' + ICON.right + "</button>" +
+              '<button type="button" class="icon-btn round" data-dir="-1" aria-label="Previous">' + ICON.left + "</button>" +
+              '<button type="button" class="icon-btn round" data-dir="1" aria-label="Next">' + ICON.right + "</button>" +
             "</div>" +
           "</div>" +
           '<div class="slider" id="slider">' + featList.map(productCard).join("") + "</div>" +
@@ -522,16 +522,16 @@
     const cod = withCod ? (SHOP.payment.codFee || 0) : 0;
     let note = "";
     if (SHOP.freeShippingMin > 0 && sub > 0 && sub < SHOP.freeShippingMin) {
-      note = '<div class="ship-note">ซื้อเพิ่มอีก ' + money(SHOP.freeShippingMin - sub) + " ส่งฟรี</div>";
+      note = '<div class="ship-note">Add ' + money(SHOP.freeShippingMin - sub) + " more for free shipping</div>";
     }
     return {
       total: sub + ship + cod,
       sub: sub, ship: ship, cod: cod,
       html:
-        '<div class="sum-row"><span>ราคาสินค้า</span><span>' + money(sub) + "</span></div>" +
-        '<div class="sum-row"><span>ค่าส่ง</span><span>' + (ship === 0 ? "ส่งฟรี" : money(ship)) + "</span></div>" +
-        (cod ? '<div class="sum-row"><span>ค่าเก็บเงินปลายทาง</span><span>' + money(cod) + "</span></div>" : "") +
-        '<div class="sum-row sum-total"><span>ยอดรวม</span><span>' + money(sub + ship + cod) + "</span></div>" +
+        '<div class="sum-row"><span>Subtotal</span><span>' + money(sub) + "</span></div>" +
+        '<div class="sum-row"><span>Shipping</span><span>' + (ship === 0 ? "Free" : money(ship)) + "</span></div>" +
+        (cod ? '<div class="sum-row"><span>COD fee</span><span>' + money(cod) + "</span></div>" : "") +
+        '<div class="sum-row sum-total"><span>Total</span><span>' + money(sub + ship + cod) + "</span></div>" +
         note
     };
   }
@@ -543,7 +543,7 @@
     function draw() {
       const items = Cart.items();
       if (!items.length) {
-        list.innerHTML = '<p class="empty">ยังไม่มีสินค้าในตะกร้า <a href="index.html">เลือกซื้อสินค้า</a></p>';
+        list.innerHTML = '<p class="empty">Your cart is empty. <a href="index.html">Continue shopping</a></p>';
         sum.hidden = true;
         return;
       }
@@ -555,14 +555,14 @@
             imageBox(p, "ci-img", false) +
             '<div class="ci-info">' +
               '<a href="product.html?id=' + encodeURIComponent(p.id) + '" class="ci-name">' + esc(p.name) + "</a>" +
-              (it.option ? '<div class="ci-opt">ตัวเลือก: ' + esc(it.option) + "</div>" : "") +
+              (it.option ? '<div class="ci-opt">Option: ' + esc(it.option) + "</div>" : "") +
               '<div class="ci-price">' + money(p.price) + "</div>" +
             "</div>" +
-            '<div class="qty qty-sm"><button type="button" data-act="dec" aria-label="ลดจำนวน">−</button>' +
+            '<div class="qty qty-sm"><button type="button" data-act="dec" aria-label="Decrease">−</button>' +
               "<span>" + it.qty + "</span>" +
-              '<button type="button" data-act="inc" aria-label="เพิ่มจำนวน">+</button></div>' +
+              '<button type="button" data-act="inc" aria-label="Increase">+</button></div>' +
             '<div class="ci-total">' + money(p.price * it.qty) + "</div>" +
-            '<button type="button" class="ci-remove" data-act="del" aria-label="ลบสินค้า">✕</button>' +
+            '<button type="button" class="ci-remove" data-act="del" aria-label="Remove">✕</button>' +
           "</div>"
         );
       }).join("");
@@ -604,8 +604,8 @@
     }
 
     const pays = [];
-    if (SHOP.payment.transfer) pays.push({ v: "transfer", t: "โอนเงิน / พร้อมเพย์" });
-    if (SHOP.payment.cod) pays.push({ v: "cod", t: "เก็บเงินปลายทาง" + (SHOP.payment.codFee ? " (+" + money(SHOP.payment.codFee) + ")" : "") });
+    if (SHOP.payment.transfer) pays.push({ v: "transfer", t: "Bank transfer / PromptPay" });
+    if (SHOP.payment.cod) pays.push({ v: "cod", t: "Cash on delivery" + (SHOP.payment.codFee ? " (+" + money(SHOP.payment.codFee) + ")" : "") });
     payBox.innerHTML = pays.map(function (p, i) {
       return '<label class="radio"><input type="radio" name="pay" value="' + p.v + '"' + (i === 0 ? " checked" : "") + "> " + esc(p.t) + "</label>";
     }).join("");
@@ -641,9 +641,9 @@
         form.querySelector('[data-err="' + field + '"]').textContent = msg;
         ok = false;
       }
-      if (!name) err("name", "กรุณากรอกชื่อ");
-      if (!/^0\d{8,9}$/.test(phone.replace(/[\s-]/g, ""))) err("phone", "กรุณากรอกเบอร์โทร 9–10 หลัก");
-      if (address.length < 10) err("address", "กรุณากรอกที่อยู่จัดส่งให้ครบ");
+      if (!name) err("name", "Please enter your name");
+      if (!/^0\d{8,9}$/.test(phone.replace(/[\s-]/g, ""))) err("phone", "Please enter a 9–10 digit phone number");
+      if (address.length < 10) err("address", "Please enter your full shipping address");
       if (!ok) return;
 
       const cod = isCod();
@@ -656,21 +656,21 @@
       });
 
       const text = [
-        "รายการสั่งซื้อ " + orderNo,
-        "ร้าน " + SHOP.name,
+        "Order " + orderNo,
+        "Shop: " + SHOP.name,
         "--------------------",
         lines.join("\n"),
         "--------------------",
-        "ราคาสินค้า " + money(s.sub),
-        "ค่าส่ง " + (s.ship === 0 ? "ส่งฟรี" : money(s.ship)),
-        cod ? "ค่าเก็บเงินปลายทาง " + money(s.cod) : null,
-        "ยอดรวม " + money(s.total),
-        "ชำระเงิน: " + (cod ? "เก็บเงินปลายทาง" : "โอนเงิน / พร้อมเพย์"),
+        "Subtotal: " + money(s.sub),
+        "Shipping: " + (s.ship === 0 ? "Free" : money(s.ship)),
+        cod ? "COD fee: " + money(s.cod) : null,
+        "Total: " + money(s.total),
+        "Payment: " + (cod ? "Cash on delivery" : "Bank transfer / PromptPay"),
         "--------------------",
-        "ชื่อ: " + name,
-        "โทร: " + phone,
-        "ที่อยู่: " + address,
-        note ? "หมายเหตุ: " + note : null
+        "Name: " + name,
+        "Phone: " + phone,
+        "Address: " + address,
+        note ? "Note: " + note : null
       ].filter(function (x) { return x !== null; }).join("\n");
 
       showResult(orderNo, text, cod, s.total);
@@ -686,27 +686,27 @@
         : "https://line.me/R/msg/text/?" + encodeURIComponent(text);
 
       const payInfo = cod ? "" :
-        '<div class="pay-info"><h3>ช่องทางชำระเงิน</h3>' +
-          "<p>ยอดที่ต้องโอน <strong>" + money(total) + "</strong></p>" +
+        '<div class="pay-info"><h3>Payment details</h3>' +
+          "<p>Amount to transfer <strong>" + money(total) + "</strong></p>" +
           (SHOP.payment.bankInfo ? "<p>" + esc(SHOP.payment.bankInfo) + "</p>" : "") +
           (SHOP.payment.promptpay ? "<p>" + esc(SHOP.payment.promptpay) + "</p>" : "") +
-          (SHOP.payment.qrImage ? '<img class="qr" src="' + esc(SHOP.payment.qrImage) + '" alt="QR พร้อมเพย์">' : "") +
-          "<p>โอนแล้วส่งสลิปพร้อมรายการสั่งซื้อมาทาง LINE</p>" +
+          (SHOP.payment.qrImage ? '<img class="qr" src="' + esc(SHOP.payment.qrImage) + '" alt="PromptPay QR">' : "") +
+          "<p>After transferring, send the payment slip with your order via LINE.</p>" +
         "</div>";
 
       result.innerHTML =
-        "<h2>สรุปรายการสั่งซื้อ</h2>" +
-        "<p>เลขที่ " + esc(orderNo) + " — คำสั่งซื้อจะสมบูรณ์เมื่อส่งรายการนี้ให้ร้าน</p>" +
+        "<h2>Order summary</h2>" +
+        "<p>Order no. " + esc(orderNo) + " — your order is complete once you send this to the shop.</p>" +
         '<pre class="order-text" id="order-text">' + esc(text) + "</pre>" +
         '<div class="result-actions">' +
-          '<a class="btn btn-primary" id="line-btn" href="' + esc(lineUrl) + '" target="_blank" rel="noopener">ส่งรายการทาง LINE</a>' +
-          '<button class="btn" id="copy-btn" type="button">คัดลอกรายการ</button>' +
+          '<a class="btn btn-primary" id="line-btn" href="' + esc(lineUrl) + '" target="_blank" rel="noopener">Send order via LINE</a>' +
+          '<button class="btn" id="copy-btn" type="button">Copy order</button>' +
         "</div>" +
         payInfo +
-        '<p><a href="index.html">กลับไปหน้าร้าน</a></p>';
+        '<p><a href="index.html">Back to shop</a></p>';
 
       document.getElementById("copy-btn").addEventListener("click", function () {
-        copyText(text).then(function () { toast("คัดลอกแล้ว"); }, function () { toast("คัดลอกไม่สำเร็จ ให้กดค้างที่ข้อความเพื่อคัดลอก"); });
+        copyText(text).then(function () { toast("Copied"); }, function () { toast("Copy failed. Press and hold the text to copy it."); });
       });
       window.scrollTo(0, 0);
     }
