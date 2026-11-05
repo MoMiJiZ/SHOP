@@ -263,12 +263,21 @@
 
         if (h.layout === "overlay" && h.effect === "glass" && h.title) {
       hero.insertAdjacentHTML("beforeend",
-        '<svg class="hero-mask" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
-          '<text class="hero-glass" x="750" y="258" text-anchor="middle" dominant-baseline="central" textLength="1300" lengthAdjust="spacingAndGlyphs">' +
-            esc(h.title) + "</text>" +
-        "</svg>");
+        '<div class="hero-word" aria-hidden="true"><span>' + esc(h.title) + "</span></div>");
       const hg = hero.querySelector(".hero-title");
       if (hg) hg.classList.add("sr-only");
+      const box = hero.querySelector(".hero-word");
+      const word = box.querySelector("span");
+      const fit = function () {
+        if (!box.clientWidth) return;
+        word.style.fontSize = "100px";
+        const w = word.getBoundingClientRect().width;
+        if (w) word.style.fontSize = (100 * box.clientWidth * 0.88 / w) + "px";
+      };
+      fit();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      window.addEventListener("load", fit);
+      window.addEventListener("resize", fit);
     }
     if (h.layout === "overlay" && h.effect === "knockout" && h.title) {
       const t = esc(h.title).toLowerCase();

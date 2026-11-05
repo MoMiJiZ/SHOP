@@ -115,6 +115,8 @@ button { font: inherit; color: inherit; }
 .hero-mask text { font-family: var(--font-display); font-weight: 700; font-size: 250px; letter-spacing: 0; fill: #000; }
 .hero-mask .hero-glass { fill: var(--hero-glass); filter: drop-shadow(0 4px 22px rgba(0, 0, 0, .18)); }
 .hero-tint { fill: var(--hero-tint); }
+.hero-word { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; pointer-events: none; }
+.hero-word span { font-family: "Oswald", "Outfit", sans-serif; font-weight: 600; line-height: 1; white-space: nowrap; letter-spacing: .01em; color: var(--hero-glass); text-shadow: 0 4px 22px rgba(0, 0, 0, .18); font-size: 12vw; transform: translateY(2%); }
 .hero-below { display: block; min-height: 0; background: #fff; }
 .hero-below picture, .hero-below .hero-img { position: static; display: block; width: 100%; height: auto; }
 .hero-below .hero-img { aspect-ratio: 3 / 1; object-fit: cover; }
